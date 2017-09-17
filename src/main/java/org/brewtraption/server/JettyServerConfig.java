@@ -1,7 +1,7 @@
 package org.brewtraption.server;
 
 public class JettyServerConfig {
-  private String hostname = "localhost";
+  private String hostname = "0.0.0.0";
   private int port = 8080;
   private boolean consoleMetrics = false;
 
