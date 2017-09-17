@@ -215,7 +215,7 @@
 				<configuration>
 					<archive>
 						<manifest>
-							<mainClass>org.example.main.Main</mainClass>
+							<mainClass>org.brewtraption.main.Main</mainClass>
 							<addDefaultImplementationEntries>true</addDefaultImplementationEntries>
 							<addClasspath>true</addClasspath>
 							<classpathPrefix>lib/</classpathPrefix>
