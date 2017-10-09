@@ -1,7 +1,9 @@
 package org.brewtraption.server;
 
+import org.brewtraption.util.BreweryProperties;
+
 public class JettyServerConfig {
-  private String hostname = "0.0.0.0";
+  private String hostname = "localhost";
   private int port = 8080;
   private boolean consoleMetrics = false;
 
@@ -46,5 +48,12 @@ public class JettyServerConfig {
     this.hostname = builder.hostname;
     this.port = builder.port;
     this.consoleMetrics = builder.consoleMetrics;
+  }
+
+  //TODO refactor out builder pattern, it's a bit overkill as we'll a have a props file anyway
+  public JettyServerConfig() {
+    this.hostname = BreweryProperties.lookupString("jetty.bind.host");
+    this.port = BreweryProperties.lookupInt("jetty.bind.port");
+    this.consoleMetrics = BreweryProperties.lookupBoolean("jetty.metrics");
   }
 }

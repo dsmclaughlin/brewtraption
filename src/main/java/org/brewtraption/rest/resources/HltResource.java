@@ -28,7 +28,7 @@ public class HltResource {
   @GET
   @Produces({ MediaType.APPLICATION_JSON })
   public Response getHLTInfo() {
-    HltDTO info = BreweryDAO.getHTLInfo();
+    HltDTO info = new HltDTO(58, 66, true); // BreweryDAO.getHTLInfo();
     return Response.ok(info).build();
   }
 
