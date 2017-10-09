@@ -1,4 +1,4 @@
-package org.brewtraption.rest.resources;
+package org.brewtraption.rest;
 
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.test.JerseyTest;

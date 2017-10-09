@@ -21,7 +21,7 @@ public class Main {
   public static void main(final String[] args) throws Exception {
     Main main = new Main();
     BreweryProperties.initialize("./src/main/resources/brewtraption.properties");
-    System.out.println("hello");
+
     JCommander jCommander = new JCommander(main, args);
     jCommander.setProgramName("java -jar jetty-jersey-brewtraption");
     if (main.help) {

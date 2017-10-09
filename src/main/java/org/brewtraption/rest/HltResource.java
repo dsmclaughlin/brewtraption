@@ -1,4 +1,4 @@
-package org.brewtraption.rest.resources;
+package org.brewtraption.rest;
 
 import org.brewtraption.dao.BreweryDAO;
 import org.brewtraption.dto.HltDTO;

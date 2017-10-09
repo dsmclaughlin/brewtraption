@@ -18,9 +18,9 @@ public class BreweryProperties {
 
   static {
     final Map<String, Object> defaults = new HashMap<>();
-    // define all defaults here
-    defaults.put("jetty.bind.port", 8080);
-    defaults.put("jetty.metrics", false);
+    defaults.put(Constants.HOST, "localhost");
+    defaults.put(Constants.PORT, 8080);
+    defaults.put(Constants.METRICS_ENABLED, false);
 
     DEFAULT_VALUES = Collections.unmodifiableMap(defaults);
   }
