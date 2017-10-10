@@ -1,6 +1,6 @@
 package org.brewtraption.server;
 
-import org.brewtraption.util.BreweryProperties;
+import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 
 public class JettyServerConfig {
@@ -9,9 +9,9 @@ public class JettyServerConfig {
   private boolean metricsEnabled;
 
   public JettyServerConfig() {
-    this.hostname = BreweryProperties.lookupString(Constants.HOST);
-    this.port = BreweryProperties.lookupInt(Constants.PORT);
-    this.metricsEnabled = BreweryProperties.lookupBoolean(Constants.METRICS_ENABLED);
+    this.hostname = BrewProps.lookupString(Constants.HOST);
+    this.port = BrewProps.lookupInt(Constants.PORT);
+    this.metricsEnabled = BrewProps.lookupBoolean(Constants.METRICS_ENABLED);
   }
 
   int getPort() {

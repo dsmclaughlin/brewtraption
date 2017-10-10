@@ -1,29 +1,29 @@
 package org.brewtraption.dao;
 
 import org.brewtraption.dto.HltDTO;
-import org.brewtraption.util.CommandRunner;
-import org.brewtraption.util.Result;
+import org.brewtraption.util.BrewProps;
+import org.brewtraption.util.Constants;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class BreweryDAO {
+
+  private static Logger logger = LoggerFactory.getLogger(BreweryDAO.class);
 
   private BreweryDAO() {
   }
 
-  //TODO figure out proper names for scripts
   public static HltDTO getHTLInfo() {
-    final CommandRunner commandRunner = new CommandRunner("./temperature.py'");
-    Result result = commandRunner.runCommand();
-
-    final int currentTemp = Integer.parseInt(result.getStdOut());
-
-    //TODO remove dummy values
-    final int targetTemp = 66;
-    final boolean heaterOn = false;
-
-    return new HltDTO(currentTemp, targetTemp, heaterOn);
+    //TODO implement refresh of current temp
+    //TODO builder pattern for HltDTO?
+    return new HltDTO(
+      BrewProps.lookupInt(Constants.HTL_CURRENT_TEMP),
+      BrewProps.lookupInt(Constants.HLT_TARGET_TEMP),
+      BrewProps.lookupBoolean(Constants.HTL_HEATING)
+    );
   }
 
-  public static void setHTLTargetTemperature(final HltDTO hltDTO) {
-    //TODO this is where we will set the temperature into a properties file.
+  public static void setHLTTargetTemperature(final HltDTO hltDTO) {
+    throw new RuntimeException("nope cant update yet");
   }
 }

@@ -28,7 +28,7 @@ public class HltResource {
   @GET
   @Produces({ MediaType.APPLICATION_JSON })
   public Response getHLTInfo() {
-    HltDTO info = new HltDTO(58, 66, true); // BreweryDAO.getHTLInfo();
+    HltDTO info = BreweryDAO.getHTLInfo();
     return Response.ok(info).build();
   }
 
@@ -36,7 +36,7 @@ public class HltResource {
   @Consumes({ MediaType.APPLICATION_JSON })
   @Path("/temp")
   public Response setTemperature(final HltDTO hltDTO) {
-    BreweryDAO.setHTLTargetTemperature(hltDTO);
+    BreweryDAO.setHLTTargetTemperature(hltDTO);
     return  Response.accepted().build();
   }
 }

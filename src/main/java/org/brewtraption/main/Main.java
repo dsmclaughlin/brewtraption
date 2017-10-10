@@ -5,7 +5,7 @@ import org.brewtraption.server.JettyServerConfig;
 
 import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
-import org.brewtraption.util.BreweryProperties;
+import org.brewtraption.util.BrewProps;
 
 public class Main {
 
@@ -20,7 +20,7 @@ public class Main {
 
   public static void main(final String[] args) throws Exception {
     Main main = new Main();
-    BreweryProperties.initialize("./src/main/resources/brewtraption.properties");
+    BrewProps.initialize("./src/main/resources/brewtraption.properties");
 
     JCommander jCommander = new JCommander(main, args);
     jCommander.setProgramName("java -jar jetty-jersey-brewtraption");

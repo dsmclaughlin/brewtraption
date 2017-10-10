@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class BreweryProperties {
+public class BrewProps {
 
   private static String filePath = "";
 
@@ -41,7 +41,8 @@ public class BreweryProperties {
   public static int lookupInt(final String key) {
     final Object defaultValue = DEFAULT_VALUES.get(key);
 
-    if (!(defaultValue instanceof Integer)) {
+    //TODO this null "waver" doesn't seem right, surely we should default after failing to find a value
+    if (!(defaultValue instanceof Integer) && defaultValue != null) {
       final String message = String.format("Default value for configuration key %s not defined or has a wrong type", key);
       throw new RuntimeException(message);
     }
@@ -93,7 +94,8 @@ public class BreweryProperties {
   public static boolean lookupBoolean(final String key) {
     final Object defaultValue = DEFAULT_VALUES.get(key);
 
-    if (!(defaultValue instanceof Boolean)) {
+    //TODO this null "waver" doesn't seem right, surely we should default after failing to find a value
+    if (!(defaultValue instanceof Boolean) && defaultValue != null) {
       final String message = String.format("Default value for configuration key %s not defined or has a wrong type", key);
       throw new RuntimeException(message);
     }
