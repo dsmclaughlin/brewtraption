@@ -6,6 +6,9 @@ public class HltDTO {
   private int targetTemperature;
   private boolean heaterOn;
 
+  public HltDTO() {
+  }
+
   public HltDTO(int temp, int targetTemp, boolean heaterOn) {
     this.currentTemperature = temp;
     this.targetTemperature = targetTemp;

@@ -157,7 +157,7 @@ public class BrewProps {
     properties.setProperty(key, value.trim());
   }
 
-  public static void setValueAndWriteFile(final String key, final String value) {
+  public static void writeValue(final String key, final String value) {
     setValue(key, value);
     writeFileQuietly();
   }

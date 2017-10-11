@@ -24,6 +24,7 @@ public class BreweryDAO {
   }
 
   public static void setHLTTargetTemperature(final HltDTO hltDTO) {
-    throw new RuntimeException("nope cant update yet");
+    Integer target = hltDTO.getTargetTemperature();
+    BrewProps.writeValue(Constants.HLT_TARGET_TEMP, target.toString());
   }
 }

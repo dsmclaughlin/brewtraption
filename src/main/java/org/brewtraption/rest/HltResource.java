@@ -34,9 +34,8 @@ public class HltResource {
 
   @PUT
   @Consumes({ MediaType.APPLICATION_JSON })
-  @Path("/temp")
   public Response setTemperature(final HltDTO hltDTO) {
     BreweryDAO.setHLTTargetTemperature(hltDTO);
-    return  Response.accepted().build();
+    return  Response.ok().build();
   }
 }
