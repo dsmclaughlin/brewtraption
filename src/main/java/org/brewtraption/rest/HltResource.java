@@ -22,7 +22,7 @@ public class HltResource {
   UriInfo uriInfo;
 
   public HltResource() {
-    System.out.println("TestResource constructed");
+
   }
 
   @GET

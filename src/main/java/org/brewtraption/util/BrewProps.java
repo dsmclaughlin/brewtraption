@@ -20,7 +20,6 @@ public class BrewProps {
     final Map<String, Object> defaults = new HashMap<>();
     defaults.put(Constants.HOST, "localhost");
     defaults.put(Constants.PORT, 8080);
-    defaults.put(Constants.METRICS_ENABLED, false);
 
     DEFAULT_VALUES = Collections.unmodifiableMap(defaults);
   }

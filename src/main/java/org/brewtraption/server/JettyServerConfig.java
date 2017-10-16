@@ -6,12 +6,10 @@ import org.brewtraption.util.Constants;
 public class JettyServerConfig {
   private String hostname;
   private int port;
-  private boolean metricsEnabled;
 
   public JettyServerConfig() {
     this.hostname = BrewProps.lookupString(Constants.HOST);
     this.port = BrewProps.lookupInt(Constants.PORT);
-    this.metricsEnabled = BrewProps.lookupBoolean(Constants.METRICS_ENABLED);
   }
 
   int getPort() {
@@ -20,9 +18,5 @@ public class JettyServerConfig {
 
   String getHost() {
     return hostname;
-  }
-
-  boolean isMetricsEnabled() {
-    return metricsEnabled;
   }
 }

@@ -6,9 +6,10 @@ public class Constants {
 
   public static String HOST="jetty.bind.host";
   public static String PORT="jetty.bind.port";
-  public static String METRICS_ENABLED="jetty.metrics";
 
   public static String HLT_TARGET_TEMP="hlt.temp.target";
   public static String HTL_CURRENT_TEMP="hlt.temp.current";
   public static String HTL_HEATING="hlt.heating";
+
+  public static String INITIAL_PROPS_FILE = "./src/main/resources/brewtraption.properties";
 }

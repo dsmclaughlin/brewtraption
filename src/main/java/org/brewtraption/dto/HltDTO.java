@@ -1,6 +1,5 @@
 package org.brewtraption.dto;
 
-//TODO should we add annotations?
 public class HltDTO {
   private int currentTemperature;
   private int targetTemperature;
