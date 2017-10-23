@@ -19,6 +19,13 @@
     <fileSet>
       <directory>${project.basedir}</directory>
       <outputDirectory>/</outputDirectory>
+      <includes>
+        <include>brewtraption.properties</include>
+      </includes>
+    </fileSet>
+    <fileSet>
+      <directory>${project.basedir}</directory>
+      <outputDirectory>/</outputDirectory>
         <includes>
           <include>license.txt</include>
         </includes>

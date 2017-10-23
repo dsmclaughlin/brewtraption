@@ -11,5 +11,5 @@ public class Constants {
   public static String HTL_CURRENT_TEMP="hlt.temp.current";
   public static String HTL_HEATING="hlt.heating";
 
-  public static String INITIAL_PROPS_FILE = "./src/main/resources/brewtraption.properties";
+  public static String PROPS_FILE = "./brewtraption.properties";
 }

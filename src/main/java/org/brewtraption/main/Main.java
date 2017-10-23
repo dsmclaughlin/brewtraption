@@ -27,7 +27,7 @@ public class Main {
   }
 
   private static void initaliseRuntimePropsFile() throws IOException {
-    Path source = Paths.get(Constants.INITIAL_PROPS_FILE);
+    Path source = Paths.get(Constants.PROPS_FILE);
     Path destination = Paths.get(buildTempFilePath());
 
     Files.copy(source, destination, StandardCopyOption.COPY_ATTRIBUTES);
@@ -40,7 +40,7 @@ public class Main {
     Date date = new Date();
     DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
     String createdTime = dateFormat.format(date);
-    return System.getProperty("java.io.tmpdir") + "brewtraptionProps-" + createdTime + ".tmp";
+    return System.getProperty("java.io.tmpdir") + "/brewtraptionProps-" + createdTime + ".tmp";
   }
 
   private void start() {
