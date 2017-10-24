@@ -21,14 +21,8 @@
       <outputDirectory>/</outputDirectory>
       <includes>
         <include>brewtraption.properties</include>
+        <include>license.txt</include>
       </includes>
-    </fileSet>
-    <fileSet>
-      <directory>${project.basedir}</directory>
-      <outputDirectory>/</outputDirectory>
-        <includes>
-          <include>license.txt</include>
-        </includes>
     </fileSet>
     <fileSet>
       <directory>${assembly.lib.directory}</directory>
