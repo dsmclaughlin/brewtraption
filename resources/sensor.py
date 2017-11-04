@@ -257,10 +257,10 @@ if __name__ == "__main__":
                 with open('sensor.out', 'w') as f:
                     f.write(data + '\n' + str(time_secs) + '\n' + st)
                 print('Timestamp = ' + st +'\nTemperature = ' + data + ' deg C.')
-                if int(data.split('.')[0]) >= 29:
-                    GPIO.output(relay, GPIO.HIGH)
-                else:
-                    GPIO.output(relay, GPIO.LOW)
+                #if int(data.split('.')[0]) >= 29:
+                #    GPIO.output(relay, GPIO.HIGH)
+                #else:
+                #    GPIO.output(relay, GPIO.LOW)
                 time.sleep(0.5)
 
         except KeyboardInterrupt:
