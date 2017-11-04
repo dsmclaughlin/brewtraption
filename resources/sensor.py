@@ -26,7 +26,7 @@ __status__ = 'Production'
 
 import RPi.GPIO as GPIO
 import time
-
+import datetime
 
 class MAX31865(object):
     def __init__(self, cs_pin, clock_pin, data_in_pin, data_out_pin, relay, address, data, units="c", board=GPIO.BCM):
@@ -250,16 +250,19 @@ if __name__ == "__main__":
     while (running):
         try:
             for rtd in rtds:
-                f = open('sensor.out', 'w')
+                time_secs = time.time()
+                st = datetime.datetime.fromtimestamp(time_secs).strftime('%Y-%m-%d %H:%M:%S')
                 code = rtd.get_data()
                 data = rtd.convert(code)
-                f.write(data)
-                print('Current temperature is ' + data + ' degrees centigrade.')
+                with open('sensor.out', 'w') as f:
+                    f.write(data + '\n' + st)
+                print('Timestamp = ' + st +'\nTemperature = ' + data + ' degrees centigrade.')
+                print('Temperature = ' + data + ' degrees centigrade.')
                 if int(data.split('.')[0]) >= 29:
                     GPIO.output(relay, GPIO.HIGH)
                 else:
                     GPIO.output(relay, GPIO.LOW)
-                time.sleep(1)
+                time.sleep(0.5)
 
         except KeyboardInterrupt:
             running = False
