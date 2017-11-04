@@ -248,13 +248,14 @@ if __name__ == "__main__":
     # Run main program
     running = True
     while (running):
+        print('Sensor script started.')
         try:
             for rtd in rtds:
-                f = open('sensorOutput', 'w')
+                f = open('sensor.out', 'w')
                 code = rtd.get_data()
                 data = rtd.convert(code)
                 f.write(data)
-                print('Sensor script running. Current temperature is ' + data + ' degrees centigrade.')
+                print('Current temperature is ' + data + ' degrees centigrade.')
                 if int(data.split('.')[0]) >= 29:
                     GPIO.output(relay, GPIO.HIGH)
                 else:
