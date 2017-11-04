@@ -1,5 +1,6 @@
 package org.brewtraption.server;
 
+import org.brewtraption.main.IncrementalNumberThread;
 import org.brewtraption.websocket.EventSocket;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -34,6 +35,8 @@ public class JettyServer {
     ServletHolder servletHolder = configureAPIResources();
     ServletContextHandler context = configureServletContextHandler(server, servletHolder);
     initaliseWebSocketContainer(context);
+    IncrementalNumberThread numberThread = new IncrementalNumberThread("numbers");
+    numberThread.start();
     startBrewtraptionServer(server);
   }
 
