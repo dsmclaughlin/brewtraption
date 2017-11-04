@@ -254,7 +254,7 @@ if __name__ == "__main__":
                 code = rtd.get_data()
                 data = rtd.convert(code)
                 f.write(data)
-                # print data
+                print('Sensor script running. Current temperature is ' + data + ' degrees centigrade.')
                 if int(data.split('.')[0]) >= 29:
                     GPIO.output(relay, GPIO.HIGH)
                 else:
