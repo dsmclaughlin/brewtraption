@@ -257,7 +257,6 @@ if __name__ == "__main__":
                 with open('sensor.out', 'w') as f:
                     f.write(data + '\n' + st)
                 print('Timestamp = ' + st +'\nTemperature = ' + data + ' degrees centigrade.')
-                print('Temperature = ' + data + ' degrees centigrade.')
                 if int(data.split('.')[0]) >= 29:
                     GPIO.output(relay, GPIO.HIGH)
                 else:
