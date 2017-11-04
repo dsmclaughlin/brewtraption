@@ -248,7 +248,6 @@ if __name__ == "__main__":
     # Run main program
     running = True
     while (running):
-        print('Sensor script started.')
         try:
             for rtd in rtds:
                 f = open('sensor.out', 'w')
