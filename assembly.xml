@@ -17,7 +17,7 @@
       </includes>
     </fileSet>
     <fileSet>
-      <directory>${project.basedir}</directory>
+      <directory>${project.basedir}/resources</directory>
       <outputDirectory>/</outputDirectory>
       <includes>
         <include>brewtraption.properties</include>
