@@ -18,10 +18,11 @@
     </fileSet>
     <fileSet>
       <directory>${project.basedir}/resources</directory>
-      <outputDirectory>/</outputDirectory>
+      <outputDirectory>/resources/</outputDirectory>
       <includes>
         <include>brewtraption.properties</include>
         <include>license.txt</include>
+        <include>*.py</include>
       </includes>
     </fileSet>
     <fileSet>

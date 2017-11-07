@@ -1,6 +1,7 @@
 package org.brewtraption.server;
 
-import org.brewtraption.main.IncrementalNumberThread;
+import org.brewtraption.main.HeaterControllerThread;
+import org.brewtraption.main.TemperatureBroadcastThread;
 import org.brewtraption.websocket.EventSocket;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
@@ -35,8 +36,26 @@ public class JettyServer {
     ServletHolder servletHolder = configureAPIResources();
     ServletContextHandler context = configureServletContextHandler(server, servletHolder);
     initaliseWebSocketContainer(context);
-    IncrementalNumberThread numberThread = new IncrementalNumberThread("numbers");
+
+    //Result result = CommandUtil.startSensor();
+
+//    if (result.getStatus() == Result.Status.FAILURE) {
+//      logger.error("Problem starting temperature read script: " + result.getStdErr());
+//      System.exit(1);
+//    }
+
+    TemperatureBroadcastThread numberThread =
+      new TemperatureBroadcastThread(TemperatureBroadcastThread.class.getSimpleName());
     numberThread.start();
+
+    HeaterControllerThread heaterControllerThread =
+      new HeaterControllerThread(HeaterControllerThread.class.getSimpleName());
+    heaterControllerThread.start();
+//
+//    CurrentTempUpdateThread updateThread =
+//      new CurrentTempUpdateThread(CurrentTempUpdateThread.class.getSimpleName());
+//    updateThread.start();
+
     startBrewtraptionServer(server);
   }
 
