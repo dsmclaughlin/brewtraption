@@ -1,5 +1,6 @@
 package org.brewtraption.server;
 
+import org.brewtraption.main.CurrentTempUpdateThread;
 import org.brewtraption.main.HeaterControllerThread;
 import org.brewtraption.main.TemperatureBroadcastThread;
 import org.brewtraption.websocket.EventSocket;
@@ -37,13 +38,6 @@ public class JettyServer {
     ServletContextHandler context = configureServletContextHandler(server, servletHolder);
     initaliseWebSocketContainer(context);
 
-    //Result result = CommandUtil.startSensor();
-
-//    if (result.getStatus() == Result.Status.FAILURE) {
-//      logger.error("Problem starting temperature read script: " + result.getStdErr());
-//      System.exit(1);
-//    }
-
     TemperatureBroadcastThread numberThread =
       new TemperatureBroadcastThread(TemperatureBroadcastThread.class.getSimpleName());
     numberThread.start();
@@ -51,10 +45,10 @@ public class JettyServer {
     HeaterControllerThread heaterControllerThread =
       new HeaterControllerThread(HeaterControllerThread.class.getSimpleName());
     heaterControllerThread.start();
-//
-//    CurrentTempUpdateThread updateThread =
-//      new CurrentTempUpdateThread(CurrentTempUpdateThread.class.getSimpleName());
-//    updateThread.start();
+
+    CurrentTempUpdateThread updateThread =
+      new CurrentTempUpdateThread(CurrentTempUpdateThread.class.getSimpleName());
+    updateThread.start();
 
     startBrewtraptionServer(server);
   }

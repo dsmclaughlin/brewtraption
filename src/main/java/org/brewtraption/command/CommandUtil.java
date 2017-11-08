@@ -15,7 +15,14 @@ public class CommandUtil {
     return new Command("python", Constants.HLT_OFF_SCRIPT).runCommand();
   }
 
-  public static Result startSensor() {
+  public static Result setHeaterState(final boolean heat) {
+    if (heat) {
+      return heaterOn();
+    }
+    return heaterOff();
+  }
+
+  public static Result readTemperature() {
     return new Command("python", Constants.HLT_SENSOR_SCRIPT).runCommand();
   }
 }
