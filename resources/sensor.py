@@ -245,24 +245,18 @@ if __name__ == "__main__":
     for rtd in rtds:
         rtd.write()
 
-    # Run main program
-    running = True
-    while (running):
-        try:
-            for rtd in rtds:
-                time_secs = time.time()
-                st = datetime.datetime.fromtimestamp(time_secs).strftime('%Y-%m-%d %H:%M:%S')
-                code = rtd.get_data()
-                data = rtd.convert(code)
-                with open('sensor.out', 'w') as f:
-                    f.write(data + '\n' + str(time_secs) + '\n' + st)
-                print('Timestamp = ' + st +'\nTemperature = ' + data + ' deg C.')
-                #if int(data.split('.')[0]) >= 29:
-                #    GPIO.output(relay, GPIO.HIGH)
-                #else:
-                #    GPIO.output(relay, GPIO.LOW)
-                time.sleep(0.5)
-
-        except KeyboardInterrupt:
-            running = False
+    # Run main program once
+    for rtd in rtds:
+        time_secs = time.time()
+        st = datetime.datetime.fromtimestamp(time_secs).strftime('%Y-%m-%d %H:%M:%S')
+        code = rtd.get_data()
+        data = rtd.convert(code)
+        with open('sensor.out', 'w') as f:
+            f.write(data + ', ' + str(time_secs) + ', ' + st)
+        print('Timestamp = ' + st +', Temperature = ' + data + ' deg C.')
+        #if int(data.split('.')[0]) >= 29:
+        #    GPIO.output(relay, GPIO.HIGH)
+        #else:
+        #    GPIO.output(relay, GPIO.LOW)
+        time.sleep(0.5)
     GPIO.cleanup()
