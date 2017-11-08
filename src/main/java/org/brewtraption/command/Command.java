@@ -1,4 +1,5 @@
-package org.brewtraption.util;
+package org.brewtraption.command;
+
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -10,27 +11,20 @@ import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.List;
 
-/**
- * <p>Contains logic to run commands on the local machine. Command will block the thread until completion.</p>
- *
- * <p>Note that if you run a command that blocks forever, such as vim, then there is no time-out implemented at this level.</p>
- */
-public class CommandRunner {
+public class Command {
 
-  private static final Logger logger = LogManager.getLogger(CommandRunner.class);
+  private static final Logger logger = LogManager.getLogger(Command.class);
 
   private ProcessBuilder pb;
 
-  public CommandRunner(final String ...command) {
+  public Command(final String...command) {
     this.pb = new ProcessBuilder(command);
-    logger.info("Creating command: " + commandAsString(command));
   }
 
   public Result runCommand() {
-    logger.info(pb.toString());
+
     Process process = null;
     Result.Status status = Result.Status.FAILURE;
-
     try {
       process = pb.start();
       StreamGobbler gobbleStdOut = new StreamGobbler(process.getInputStream());
@@ -78,7 +72,8 @@ public class CommandRunner {
       this.is = is;
     }
 
-    @Override public void run() {
+    @Override
+    public void run() {
       BufferedReader read = new BufferedReader(new InputStreamReader(is, Charset.defaultCharset()));
       String line;
       try {

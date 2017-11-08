@@ -1,7 +1,7 @@
-package org.brewtraption.util;
+package org.brewtraption.command;
 
 public class Result {
-  private Status resultStatus;
+  private Status status;
   private String customMessage = "";
 
   private String stdOut  = "";
@@ -9,23 +9,23 @@ public class Result {
 
   private Throwable failureCause = null;
 
-  public Result(final Status resultStatus, final String customMessage) {
-    this(resultStatus);
+  public Result(final Status status, final String customMessage) {
+    this(status);
     this.customMessage = customMessage;
   }
 
-  public Result(final Status resultStatus, final String customMessage, final Throwable failureCause) {
-    this(resultStatus,customMessage);
+  public Result(final Status status, final String customMessage, final Throwable failureCause) {
+    this(status,customMessage);
     this.failureCause = failureCause;
   }
 
-  public Result(final Status resultStatus) {
-    this.resultStatus = resultStatus;
+  public Result(final Status status) {
+    this.status = status;
   }
 
 
-  public Status getResultStatus() {
-    return resultStatus;
+  public Status getStatus() {
+    return status;
   }
 
   public String getCustomMessage() {
@@ -48,6 +48,10 @@ public class Result {
     this.stdErr = stdErr;
   }
 
+  /**
+   *
+   * @return Will return null if no Throwable has been attached to this result as the failure failureCause, otherwise will return the throwable
+   */
   public Throwable getFailureCause() {
     return failureCause;
   }

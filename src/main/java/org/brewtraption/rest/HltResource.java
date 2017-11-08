@@ -38,4 +38,12 @@ public class HltResource {
     BreweryDAO.setHLTTargetTemperature(hltDTO);
     return  Response.ok().build();
   }
+
+  @PUT
+  @Path("/heat")
+  @Consumes({ MediaType.APPLICATION_JSON })
+  public Response setHeaterOnOff(Boolean heat) {
+    BreweryDAO.heat(heat);
+    return  Response.ok().build();
+  }
 }

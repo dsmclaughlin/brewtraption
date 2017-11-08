@@ -60,7 +60,28 @@ public class BrewProps {
   public static long lookupLong(final String key) {
     final Object defaultValue = DEFAULT_VALUES.get(key);
 
-    if (!(defaultValue instanceof Long)) {
+    //TODO this null "waver" doesn't seem right, surely we should default after failing to find a value
+    if (!(defaultValue instanceof Long) && defaultValue != null) {
+      final String message = String.format("Default value for configuration key %s not defined or has a wrong type", key);
+      throw new RuntimeException(message);
+    }
+
+    final Object found = getProperty(key, defaultValue);
+
+    if (found instanceof Long) {
+      return ((Number) found).longValue();
+    } else {
+      final String message = String.format("Value for configuration key %s is not a number (%s), using default.", key,
+        String.valueOf(found));
+      return (Long) defaultValue;
+    }
+  }
+
+  public static Double lookupDouble(final String key) {
+    final Object defaultValue = DEFAULT_VALUES.get(key);
+
+    //TODO this null "waver" doesn't seem right, surely we should default after failing to find a value
+    if (!(defaultValue instanceof Double) && defaultValue != null) {
       final String message = String.format("Default value for configuration key %s not defined or has a wrong type", key);
       throw new RuntimeException(message);
     }
@@ -68,11 +89,11 @@ public class BrewProps {
     final Object found = getProperty(key, defaultValue);
 
     if (found instanceof Number) {
-      return ((Number) found).longValue();
+      return ((Number) found).doubleValue();
     } else {
       final String message = String.format("Value for configuration key %s is not a number (%s), using default.", key,
         String.valueOf(found));
-      return (Long) defaultValue;
+      return (Double) defaultValue;
     }
   }
 
