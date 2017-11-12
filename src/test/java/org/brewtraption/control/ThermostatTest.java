@@ -18,8 +18,6 @@ import java.io.IOException;
 
 public class ThermostatTest {
 
-  private File propertyFile;
-
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
@@ -28,21 +26,21 @@ public class ThermostatTest {
 
   @Before
   public void setup() throws IOException {
-    propertyFile = temporaryFolder.newFile("brewtraption.properties");
+    File propertyFile = temporaryFolder.newFile("brewtraption.properties");
     BrewProps.initialize(propertyFile.getAbsolutePath());
   }
 
   @Test
   public void testTurnHeaterOn() {
     expectHeaterToSwitchOn();
-    Thermostat.checkTempAndSetHeaterState(8.0, 10.0);
+    Thermostat.setHeaterState(8.0, 10.0);
     assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(true));
   }
 
   @Test
   public void testTurnHeaterOff() {
     expectHeaterToSwitchOff();
-    Thermostat.checkTempAndSetHeaterState(10.0, 8.0);
+    Thermostat.setHeaterState(10.0, 8.0);
     assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(false));
   }
 
@@ -51,7 +49,7 @@ public class ThermostatTest {
     expectHeaterToSwitchOff();
     double current = 10.0;
     double target = current + BrewProps.lookupDouble(Constants.HTL_OFF_DELTA);
-    Thermostat.checkTempAndSetHeaterState(current, target);
+    Thermostat.setHeaterState(current, target);
   }
 
   @Test
@@ -59,7 +57,7 @@ public class ThermostatTest {
     expectHeaterToSwitchOn();
     double current = 10.0;
     double target = current + BrewProps.lookupDouble(Constants.HTL_OFF_DELTA) + 0.1;
-    Thermostat.checkTempAndSetHeaterState(current, target);
+    Thermostat.setHeaterState(current, target);
   }
 
   private void expectHeaterToSwitchOn() {

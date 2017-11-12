@@ -1,6 +1,6 @@
 package org.brewtraption.control;
 
-public enum HeaterOverride {
+public enum OverrideState {
   NO_OVERRIDE, ON, OFF;
 
   public Boolean overridden() {

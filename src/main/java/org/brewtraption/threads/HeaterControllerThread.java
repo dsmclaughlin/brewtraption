@@ -1,10 +1,8 @@
 package org.brewtraption.threads;
 
-import org.brewtraption.command.CommandUtil;
+import org.brewtraption.control.HeaterController;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
-import org.brewtraption.control.HeaterOverride;
-import org.brewtraption.control.Thermostat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -20,25 +18,9 @@ public class HeaterControllerThread extends Thread {
     while (true) {
       Double currentTemp = BrewProps.lookupDouble(Constants.HLT_CURRENT_TEMP);
       Double targetTemp = BrewProps.lookupDouble(Constants.HLT_TARGET_TEMP);
-
-      //TODO add look up enum
-      String savedProp = BrewProps.lookupString(Constants.HLT_HEATER_OVERRIDE);
-      HeaterOverride override = HeaterOverride.valueOf(savedProp);
-
-      if (!override.overridden()) {
-        Thermostat.checkTempAndSetHeaterState(currentTemp, targetTemp);
-      } else {
-        setOverride(override);
-      }
-
+      HeaterController.setHeaterState(currentTemp, targetTemp);
       sleep();
     }
-  }
-
-
-  private void setOverride(HeaterOverride override) {
-    CommandUtil.setHeaterState(override.heaterState());
-    BrewProps.writeValue(Constants.HLT_HEATING, override.heaterState().toString());
   }
 
   private void sleep() {

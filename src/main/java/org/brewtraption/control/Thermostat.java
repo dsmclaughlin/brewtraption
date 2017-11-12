@@ -5,7 +5,7 @@ import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 
 public class Thermostat {
-  public static void checkTempAndSetHeaterState(Double current, Double target) {
+  public static void setHeaterState(Double current, Double target) {
     if (closeEnough(current, target)) {
       switchOff();
     } else {
