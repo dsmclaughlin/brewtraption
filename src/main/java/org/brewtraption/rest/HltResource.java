@@ -1,6 +1,6 @@
 package org.brewtraption.rest;
 
-import org.brewtraption.control.BreweryDAO;
+import org.brewtraption.control.BreweryController;
 import org.brewtraption.dto.HltDTO;
 
 import javax.inject.Singleton;
@@ -29,14 +29,14 @@ public class HltResource {
   @GET
   @Produces({ MediaType.APPLICATION_JSON })
   public Response getHLTInfo() {
-    HltDTO info = BreweryDAO.getHTLInfo();
+    HltDTO info = BreweryController.getHTLInfo();
     return Response.ok(info).build();
   }
 
   @PUT
   @Consumes({ MediaType.APPLICATION_JSON })
   public Response setTemperature(final HltDTO hltDTO) {
-    BreweryDAO.setHLTTargetTemperature(hltDTO);
+    BreweryController.setHLTTargetTemperature(hltDTO);
     return  Response.ok().build();
   }
 
@@ -44,7 +44,7 @@ public class HltResource {
   @Path("/heat")
   @Consumes({ MediaType.APPLICATION_JSON })
   public Response setHeaterOnOff(Boolean heat) {
-    BreweryDAO.heat(heat);
+    BreweryController.heat(heat);
     return  Response.ok().build();
   }
 }

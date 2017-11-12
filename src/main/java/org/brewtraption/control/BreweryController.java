@@ -8,11 +8,11 @@ import org.brewtraption.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class BreweryDAO {
+public class BreweryController {
 
-  private static Logger logger = LoggerFactory.getLogger(BreweryDAO.class);
+  private static Logger logger = LoggerFactory.getLogger(BreweryController.class);
 
-  private BreweryDAO() {
+  private BreweryController() {
   }
 
   public static HltDTO getHTLInfo() {
