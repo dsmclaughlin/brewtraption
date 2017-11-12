@@ -1,6 +1,6 @@
 package org.brewtraption.rest;
 
-import org.brewtraption.dao.BreweryDAO;
+import org.brewtraption.control.BreweryDAO;
 import org.brewtraption.dto.HltDTO;
 
 import javax.inject.Singleton;
@@ -25,6 +25,7 @@ public class HltResource {
 
   }
 
+  //TODO UPDATE ALL TO SET OVERRIDE AND SHOW STATE NOT SET STATE.
   @GET
   @Produces({ MediaType.APPLICATION_JSON })
   public Response getHLTInfo() {

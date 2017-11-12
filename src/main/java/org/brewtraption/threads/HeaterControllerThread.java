@@ -1,9 +1,10 @@
-package org.brewtraption.main;
+package org.brewtraption.threads;
 
 import org.brewtraption.command.CommandUtil;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
-import org.brewtraption.util.HeaterOverride;
+import org.brewtraption.control.HeaterOverride;
+import org.brewtraption.control.Thermostat;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +26,7 @@ public class HeaterControllerThread extends Thread {
       HeaterOverride override = HeaterOverride.valueOf(savedProp);
 
       if (!override.overridden()) {
-        checkTempAndSetHeaterState(currentTemp, targetTemp);
+        Thermostat.checkTempAndSetHeaterState(currentTemp, targetTemp);
       } else {
         setOverride(override);
       }
@@ -34,29 +35,6 @@ public class HeaterControllerThread extends Thread {
     }
   }
 
-  private void checkTempAndSetHeaterState(Double currentTemp, Double targetTemp) {
-    if (closeEnough(currentTemp, targetTemp)) {
-      sleep();
-    } else if (currentTemp > targetTemp) {
-      switchOff();
-    } else {
-      switchOn();
-    }
-  }
-
-  private boolean closeEnough(Double currentTemp, Double targetTemp) {
-    return Math.abs(currentTemp-targetTemp) < 1;
-  }
-
-  private void switchOff() {
-    CommandUtil.heaterOff();
-    BrewProps.writeValue(Constants.HLT_HEATING, "false");
-  }
-
-  private void switchOn() {
-    CommandUtil.heaterOn();
-    BrewProps.writeValue(Constants.HLT_HEATING, "true");
-  }
 
   private void setOverride(HeaterOverride override) {
     CommandUtil.setHeaterState(override.heaterState());

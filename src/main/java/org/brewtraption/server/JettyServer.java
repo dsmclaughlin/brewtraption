@@ -1,8 +1,8 @@
 package org.brewtraption.server;
 
-import org.brewtraption.main.CurrentTempUpdateThread;
-import org.brewtraption.main.HeaterControllerThread;
-import org.brewtraption.main.TemperatureBroadcastThread;
+import org.brewtraption.threads.CurrentTempUpdateThread;
+import org.brewtraption.threads.HeaterControllerThread;
+import org.brewtraption.threads.TemperatureBroadcastThread;
 import org.brewtraption.websocket.EventSocket;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;

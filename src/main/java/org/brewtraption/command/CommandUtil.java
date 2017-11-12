@@ -16,10 +16,7 @@ public class CommandUtil {
   }
 
   public static Result setHeaterState(final boolean heat) {
-    if (heat) {
-      return heaterOn();
-    }
-    return heaterOff();
+    return heat ? heaterOn() : heaterOff();
   }
 
   public static Result readTemperature() {

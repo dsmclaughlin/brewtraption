@@ -1,4 +1,4 @@
-package org.brewtraption.util;
+package org.brewtraption.control;
 
 public enum HeaterOverride {
   NO_OVERRIDE, ON, OFF;

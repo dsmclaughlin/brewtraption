@@ -1,4 +1,4 @@
-package org.brewtraption.main;
+package org.brewtraption.threads;
 
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;

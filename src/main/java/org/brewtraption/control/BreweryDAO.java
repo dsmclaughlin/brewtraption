@@ -1,4 +1,4 @@
-package org.brewtraption.dao;
+package org.brewtraption.control;
 
 import org.brewtraption.command.CommandUtil;
 import org.brewtraption.command.Result;
@@ -30,6 +30,7 @@ public class BreweryDAO {
     BrewProps.writeValue(Constants.HLT_TARGET_TEMP, target.toString());
   }
 
+  //TODO no good anymore
   public static void heat(final boolean heat) {
     logger.info("Setting heat to " + heat);
 

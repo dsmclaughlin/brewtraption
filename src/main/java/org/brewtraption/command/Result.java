@@ -48,10 +48,6 @@ public class Result {
     this.stdErr = stdErr;
   }
 
-  /**
-   *
-   * @return Will return null if no Throwable has been attached to this result as the failure failureCause, otherwise will return the throwable
-   */
   public Throwable getFailureCause() {
     return failureCause;
   }
