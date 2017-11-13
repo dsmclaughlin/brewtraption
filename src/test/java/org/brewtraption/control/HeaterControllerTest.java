@@ -17,8 +17,6 @@ import java.io.IOException;
 
 public class HeaterControllerTest {
 
-  private File propertyFile;
-
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
@@ -27,7 +25,7 @@ public class HeaterControllerTest {
 
   @Before
   public void setup() throws IOException {
-    propertyFile = temporaryFolder.newFile("brewtraption.properties");
+    File propertyFile = temporaryFolder.newFile("brewtraption.properties");
     BrewProps.initialize(propertyFile.getAbsolutePath());
   }
 

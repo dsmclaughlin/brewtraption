@@ -1,6 +1,7 @@
 package org.brewtraption.rest;
 
 import org.brewtraption.control.BreweryController;
+import org.brewtraption.control.OverrideState;
 import org.brewtraption.dto.HltDTO;
 
 import javax.inject.Singleton;
@@ -25,7 +26,6 @@ public class HltResource {
 
   }
 
-  //TODO UPDATE ALL TO SET OVERRIDE AND SHOW STATE NOT SET STATE.
   @GET
   @Produces({ MediaType.APPLICATION_JSON })
   public Response getHLTInfo() {
@@ -41,10 +41,10 @@ public class HltResource {
   }
 
   @PUT
-  @Path("/heat")
+  @Path("/override")
   @Consumes({ MediaType.APPLICATION_JSON })
-  public Response setHeaterOnOff(Boolean heat) {
-    BreweryController.heat(heat);
+  public Response setHeaterOnOff(final OverrideState state) {
+    BreweryController.overrideHeater(state);
     return  Response.ok().build();
   }
 }
