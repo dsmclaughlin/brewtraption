@@ -23,7 +23,6 @@ public class HltResource {
   UriInfo uriInfo;
 
   public HltResource() {
-
   }
 
   @GET
@@ -34,6 +33,7 @@ public class HltResource {
   }
 
   @PUT
+  @Path("/targetTemp")
   @Consumes({ MediaType.APPLICATION_JSON })
   public Response setTemperature(final HltDTO hltDTO) {
     BreweryController.setHLTTargetTemperature(hltDTO);

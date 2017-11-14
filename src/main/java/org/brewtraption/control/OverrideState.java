@@ -1,11 +1,11 @@
 package org.brewtraption.control;
 
 public enum OverrideState {
-  NO_OVERRIDE, ON, OFF;
+  NONE, ON, OFF;
 
   public Boolean overridden() {
     switch (this) {
-      case NO_OVERRIDE:
+      case NONE:
         return false;
       case ON:
         return true;
@@ -18,7 +18,7 @@ public enum OverrideState {
 
   public Boolean heaterState() {
     switch (this) {
-      case NO_OVERRIDE:
+      case NONE:
         throw new IllegalStateException();
       case ON:
         return true;

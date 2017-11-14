@@ -34,7 +34,7 @@ public class HeaterControllerTest {
     Double current = 10.0;
     Double target = 10.0;
     expectSetHeaterState(current, target);
-    BrewProps.setValue(Constants.HLT_HEATER_OVERRIDE, OverrideState.NO_OVERRIDE.toString());
+    BrewProps.setValue(Constants.HLT_HEATER_OVERRIDE, OverrideState.NONE.toString());
     HeaterController.setHeaterState(current, target);
   }
 

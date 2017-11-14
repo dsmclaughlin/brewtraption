@@ -9,7 +9,7 @@ public class OverrideStateTest {
 
   @Test
   public void testOverridden() {
-    assertThat(OverrideState.NO_OVERRIDE.overridden(), is(false));
+    assertThat(OverrideState.NONE.overridden(), is(false));
     assertThat(OverrideState.ON.overridden(), is(true));
     assertThat(OverrideState.OFF.overridden(), is(true));
   }
