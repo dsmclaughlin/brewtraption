@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class HeaterControllerThread extends Thread {
 
-  static Logger logger = LoggerFactory.getLogger(HeaterControllerThread.class);
+  private static Logger logger = LoggerFactory.getLogger(HeaterControllerThread.class);
 
   public HeaterControllerThread(String str) {
     super(str);

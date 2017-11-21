@@ -22,8 +22,7 @@ public class BreweryController {
     );
   }
 
-  public static void setHLTTargetTemperature(final HltDTO hltDTO) {
-    Integer target = hltDTO.getTargetTemperature();
+  public static void setHLTTargetTemperature(final Double target) {
     BrewProps.writeValue(Constants.HLT_TARGET_TEMP, target.toString());
   }
 

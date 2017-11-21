@@ -33,10 +33,10 @@ public class HltResource {
   }
 
   @PUT
-  @Path("/targetTemp")
+  @Path("/target")
   @Consumes({ MediaType.APPLICATION_JSON })
-  public Response setTemperature(final HltDTO hltDTO) {
-    BreweryController.setHLTTargetTemperature(hltDTO);
+  public Response setTemperature(final Double target) {
+    BreweryController.setHLTTargetTemperature(target);
     return  Response.ok().build();
   }
 

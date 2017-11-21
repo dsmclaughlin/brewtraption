@@ -253,7 +253,8 @@ if __name__ == "__main__":
         data = rtd.convert(code)
         with open('sensor.out', 'w') as f:
             f.write(data + ', ' + str(time_secs) + ', ' + st)
-        print('Timestamp = ' + st +', Temperature = ' + data + ' deg C.')
+        #line below seems to be the one that ends up in std out.
+        print(st + ',' + data)
         #if int(data.split('.')[0]) >= 29:
         #    GPIO.output(relay, GPIO.HIGH)
         #else:

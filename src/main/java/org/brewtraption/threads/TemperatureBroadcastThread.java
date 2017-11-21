@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 
 public class TemperatureBroadcastThread extends Thread {
 
-  static Logger logger = LoggerFactory.getLogger(TemperatureBroadcastThread.class);
+  private static Logger logger = LoggerFactory.getLogger(TemperatureBroadcastThread.class);
 
   public TemperatureBroadcastThread(String str) {
     super(str);

@@ -1,5 +1,8 @@
 package org.brewtraption.threads;
 
+import org.brewtraption.command.CommandUtil;
+import org.brewtraption.command.Result;
+import org.brewtraption.control.Thermocouple;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 import org.slf4j.Logger;
@@ -13,7 +16,7 @@ import java.util.List;
 
 public class CurrentTempUpdateThread extends Thread {
 
-  static Logger logger = LoggerFactory.getLogger(CurrentTempUpdateThread.class);
+  private static Logger logger = LoggerFactory.getLogger(CurrentTempUpdateThread.class);
 
   public CurrentTempUpdateThread(String str) {
     super(str);
@@ -21,30 +24,11 @@ public class CurrentTempUpdateThread extends Thread {
 
   public void run() {
     while (true) {
-      Double currentTemp = readFIle();
-      BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, currentTemp.toString());
+      Result result = CommandUtil.readTemperature();
+      Thermocouple thermocouple = new Thermocouple(result);
+      BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, thermocouple.getTemperature());
       sleep();
     }
-  }
-
-  private Double readFIle() {
-    Path path = Paths.get(Constants.SENSOR_OUTPUT);
-    List<String> lines = null;
-
-    try {
-      lines = Files.readAllLines(path);
-    } catch (IOException e) {
-      logger.error("Could not read temperature from: " + Constants.SENSOR_OUTPUT);
-    }
-
-    String temp = "0";
-    if (null != lines && !lines.isEmpty()) {
-      temp = lines.get(0);
-    } else {
-      logger.error("Could not read temperature from: " + Constants.SENSOR_OUTPUT);
-    }
-
-    return Double.parseDouble(temp);
   }
 
   private void sleep() {

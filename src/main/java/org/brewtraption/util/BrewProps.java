@@ -174,6 +174,7 @@ public class BrewProps {
     }
   }
 
+  @Deprecated
   public static void setValue(final String key, final String value) {
     properties.setProperty(key, value.trim());
   }
