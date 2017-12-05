@@ -3,9 +3,14 @@ package org.brewtraption.control;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
+import com.sun.tools.classfile.ConstantPool;
+import mockit.Capturing;
 import mockit.Mocked;
 import mockit.StrictExpectations;
+import mockit.Tested;
+import org.brewtraption.command.CommandFactory;
 import org.brewtraption.command.CommandUtil;
+import org.brewtraption.command.PiCommandUtil;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 import org.junit.Before;
@@ -21,13 +26,11 @@ public class ThermostatTest {
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
 
-  @Mocked
-  public CommandUtil commandUtil;
-
   @Before
   public void setup() throws IOException {
     File propertyFile = temporaryFolder.newFile("brewtraption.properties");
     BrewProps.initialize(propertyFile.getAbsolutePath());
+    BrewProps.writeValue(Constants.DEPLOYED, "true");
   }
 
   @Test
@@ -61,16 +64,20 @@ public class ThermostatTest {
   }
 
   private void expectHeaterToSwitchOn() {
-    new StrictExpectations() {{
-      CommandUtil.heaterOn(); times = 1;
-      CommandUtil.heaterOff(); times = 0;
+    final CommandUtil util = new PiCommandUtil();
+    new StrictExpectations(PiCommandUtil.class, CommandFactory.class) {{
+      CommandFactory.command(); result = util;
+      util.heaterOn(); times = 1;
+      util.heaterOff(); times = 0;
     }};
   }
 
   private void expectHeaterToSwitchOff() {
-    new StrictExpectations() {{
-      CommandUtil.heaterOn(); times = 0;
-      CommandUtil.heaterOff(); times = 1;
+    final CommandUtil util = new PiCommandUtil();
+    new StrictExpectations(PiCommandUtil.class, CommandFactory.class) {{
+      CommandFactory.command(); result = util;
+      util.heaterOn(); times = 0;
+      util.heaterOff(); times = 1;
     }};
   }
 }

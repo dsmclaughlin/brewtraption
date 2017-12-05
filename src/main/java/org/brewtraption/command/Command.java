@@ -100,7 +100,7 @@ public class Command {
     }
   }
 
-  private static String commandAsString(final String[] commandArray) {
+  private String commandAsString(final String[] commandArray) {
     StringBuilder sb = new StringBuilder();
     for (String command : commandArray) {
       sb.append(command).append(" ");

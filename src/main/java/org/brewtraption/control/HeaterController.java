@@ -1,6 +1,7 @@
 package org.brewtraption.control;
 
-import org.brewtraption.command.CommandUtil;
+import org.brewtraption.command.CommandFactory;
+import org.brewtraption.command.PiCommandUtil;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 
@@ -18,8 +19,9 @@ public class HeaterController {
     }
   }
 
-  private static void setOverride(OverrideState override) {
-    CommandUtil.setHeaterState(override.heaterState());
+  private static void setOverride(final OverrideState override) {
+    CommandFactory.command().setHeaterState(override.heaterState());
     BrewProps.writeValue(Constants.HLT_HEATING, override.heaterState().toString());
+    BrewProps.writeValue(Constants.HLT_HEATER_OVERRIDE, override.toString());
   }
 }

@@ -1,6 +1,3 @@
-/**
- * Copyright 2017 WANDisco
- */
 package org.brewtraption.websocket;
 
 import java.io.IOException;
@@ -13,7 +10,6 @@ public class SocketSessionHandler {
 
   private final Set<Session> sessions = new HashSet<>();
 
-  // TODO replace with DI
   private static class SocketSessionHandlerholder {
     public static final SocketSessionHandler INSTANCE = new SocketSessionHandler();
   }

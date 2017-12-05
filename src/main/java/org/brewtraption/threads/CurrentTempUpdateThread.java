@@ -1,18 +1,12 @@
 package org.brewtraption.threads;
 
-import org.brewtraption.command.CommandUtil;
+import org.brewtraption.command.CommandFactory;
 import org.brewtraption.command.Result;
 import org.brewtraption.control.Thermocouple;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.List;
 
 public class CurrentTempUpdateThread extends Thread {
 
@@ -24,7 +18,7 @@ public class CurrentTempUpdateThread extends Thread {
 
   public void run() {
     while (true) {
-      Result result = CommandUtil.readTemperature();
+      Result result = CommandFactory.command().readTemperature();
       Thermocouple thermocouple = new Thermocouple(result);
       BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, thermocouple.getTemperature());
       sleep();
