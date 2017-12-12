@@ -3,8 +3,6 @@ package org.brewtraption.control;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import mockit.Mocked;
-import mockit.StrictExpectations;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 import org.junit.Before;
@@ -15,13 +13,12 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 
+import mockit.StrictExpectations;
+
 public class HeaterControllerTest {
 
   @Rule
   public TemporaryFolder temporaryFolder = new TemporaryFolder();
-
-  @Mocked
-  public Thermostat thermostat;
 
   @Before
   public void setup() throws IOException {
@@ -59,13 +56,13 @@ public class HeaterControllerTest {
   }
 
   private void expectSetHeaterState(final Double current, final Double target) {
-    new StrictExpectations() {{
+    new StrictExpectations(Thermostat.class) {{
       Thermostat.setHeaterState(current, target); times = 1;
     }};
   }
 
   private void expectNotToSetHeaterState() {
-    new StrictExpectations() {{
+    new StrictExpectations(Thermostat.class) {{
       Thermostat.setHeaterState(anyDouble, anyDouble); times = 0;
     }};
   }

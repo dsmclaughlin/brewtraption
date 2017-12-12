@@ -29,10 +29,8 @@ public class BreweryController {
 
   public static void overrideHeater(final OverrideState state) {
     BrewProps.writeValue(Constants.HLT_HEATER_OVERRIDE, state.toString());
-    Boolean currentHeaterState = BrewProps.lookupBoolean(Constants.HLT_HEATING);
-    Boolean overriddenHeaterState = state.heaterState();
 
-    if (currentHeaterState != overriddenHeaterState) {
+    if (state.overridden()) {
       BrewProps.writeValue(Constants.HLT_HEATING, state.heaterState().toString());
     }
   }

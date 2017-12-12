@@ -12,20 +12,21 @@ public enum OverrideState {
       case OFF:
         return true;
       default:
-        throw new IllegalStateException();
+        throw new IllegalStateException("Illegal OverrideState encountered when calling overridden method");
     }
   }
 
   public Boolean heaterState() {
     switch (this) {
       case NONE:
-        throw new IllegalStateException();
+        String message = "Illegal OverrideState %s is not a valid heater state";
+        throw new IllegalStateException(String.format(message, NONE.toString()));
       case ON:
         return true;
       case OFF:
         return false;
       default:
-        throw new IllegalStateException();
+        throw new IllegalStateException("Illegal OverrideState encountered, no default implementation.");
     }
   }
 }

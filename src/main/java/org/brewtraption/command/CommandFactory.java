@@ -31,7 +31,7 @@ public class CommandFactory {
   }
 
   private static void logWarning() {
-    String warnMsg = "Host name did not contain raspberry, running in local mode, override by setting % to true.";
+    String warnMsg = "Host name did not contain raspberry, running in local mode, override by setting %s to true.";
     logger.warn(String.format(warnMsg, Constants.DEPLOYED));
   }
 

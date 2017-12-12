@@ -1,16 +1,13 @@
 package org.brewtraption.control;
 
 import org.brewtraption.command.CommandFactory;
-import org.brewtraption.command.PiCommandUtil;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 
 public class HeaterController {
 
   public static void setHeaterState(final Double current, final Double target) {
-    //TODO add look up enum
-    String savedProp = BrewProps.lookupString(Constants.HLT_HEATER_OVERRIDE);
-    OverrideState override = OverrideState.valueOf(savedProp);
+    OverrideState override = BrewProps.lookUpOverrideState(Constants.HLT_HEATER_OVERRIDE);
 
     if (override.overridden()) {
       setOverride(override);

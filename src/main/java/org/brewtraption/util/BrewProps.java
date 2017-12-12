@@ -1,5 +1,7 @@
 package org.brewtraption.util;
 
+import org.brewtraption.control.OverrideState;
+
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -36,6 +38,12 @@ public class BrewProps {
       found = "";
     }
     return String.valueOf(found);
+  }
+
+  //TODO hacky this whole class actually needs a good refactor
+  public static OverrideState lookUpOverrideState(final String key) {
+    String state = lookupString(key);
+    return OverrideState.valueOf(state);
   }
 
   public static int lookupInt(final String key) {
