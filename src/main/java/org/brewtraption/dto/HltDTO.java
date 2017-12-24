@@ -7,16 +7,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "HLT")
 public class HltDTO {
-  private int currentTemperature;
-  private int targetTemperature;
+  private Double currentTemperature;
+  private Double targetTemperature;
   private boolean heaterOn;
   private OverrideState overrideState;
 
   public HltDTO() {
   }
 
-  public HltDTO(final int temp, final int targetTemp,
-                      final boolean heaterOn, final OverrideState overrideState) {
+  public HltDTO(final Double temp, final Double targetTemp,
+                final boolean heaterOn, final OverrideState overrideState) {
     this.currentTemperature = temp;
     this.targetTemperature = targetTemp;
     this.heaterOn = heaterOn;
@@ -24,20 +24,20 @@ public class HltDTO {
   }
 
   @XmlElement(name = "currentTemperature")
-  public int getCurrentTemperature() {
+  public Double getCurrentTemperature() {
     return currentTemperature;
   }
 
-  public void setCurrentTemperature(final int currentTemperature) {
+  public void setCurrentTemperature(final Double currentTemperature) {
     this.currentTemperature = currentTemperature;
   }
 
   @XmlElement(name = "targetTemperature")
-  public int getTargetTemperature() {
+  public Double getTargetTemperature() {
     return targetTemperature;
   }
 
-  public void setTargetTemperature(final int targetTemperature) {
+  public void setTargetTemperature(final Double targetTemperature) {
     this.targetTemperature = targetTemperature;
   }
 

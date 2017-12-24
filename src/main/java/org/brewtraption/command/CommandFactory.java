@@ -14,10 +14,10 @@ public class CommandFactory {
 
   public static CommandUtil command() {
     if (null == util) {
-      return getProperUtil();
-    } else {
-      return util;
+      util = getProperUtil();
     }
+
+    return util;
   }
 
   //TODO - not very good, replace with var that is included in packaged at build time

@@ -15,8 +15,8 @@ public class BreweryController {
 
   public static HltDTO getHTLInfo() {
     return new HltDTO(
-      BrewProps.lookupInt(Constants.HLT_CURRENT_TEMP),
-      BrewProps.lookupInt(Constants.HLT_TARGET_TEMP),
+      BrewProps.lookupDouble(Constants.HLT_CURRENT_TEMP),
+      BrewProps.lookupDouble(Constants.HLT_TARGET_TEMP),
       BrewProps.lookupBoolean(Constants.HLT_HEATING),
       OverrideState.valueOf(BrewProps.lookupString(Constants.HLT_HEATER_OVERRIDE))
     );
