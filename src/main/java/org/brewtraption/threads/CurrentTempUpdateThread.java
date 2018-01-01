@@ -19,8 +19,15 @@ public class CurrentTempUpdateThread extends Thread {
   public void run() {
     while (true) {
       Result result = CommandFactory.command().readTemperature();
-      Thermocouple thermocouple = new Thermocouple(result);
-      BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, thermocouple.getTemperature());
+
+      if (BrewProps.lookupBoolean(Constants.DEPLOYED)) {
+        Thermocouple thermocouple = new Thermocouple(result);
+        BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, thermocouple.getTemperature());
+      } else {
+        String dummyTemp = result.getStdOut();
+        BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, dummyTemp);
+      }
+
       sleep();
     }
   }

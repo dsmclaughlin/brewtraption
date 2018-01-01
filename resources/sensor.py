@@ -53,6 +53,7 @@ class MAX31865(object):
         self.relay = relay
 
         # Initialize needed GPIO
+        GPIO.setwarnings(False)
         GPIO.setmode(self.board)
         GPIO.setup(self.cs_pin, GPIO.OUT)
         GPIO.setup(self.clock_pin, GPIO.OUT)
@@ -260,4 +261,3 @@ if __name__ == "__main__":
         #else:
         #    GPIO.output(relay, GPIO.LOW)
         time.sleep(0.5)
-    GPIO.cleanup()

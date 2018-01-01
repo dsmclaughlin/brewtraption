@@ -12,7 +12,7 @@ import javax.websocket.WebSocketContainer;
 public class WebSocketClient {
 
   public static void main(final String[] args) {
-    URI uri = URI.create("ws://192.168.0.242:8083/ws/");
+    URI uri = URI.create("ws://192.168.0.102:8083/ws/");
 
     try {
       WebSocketContainer container = ContainerProvider.getWebSocketContainer();

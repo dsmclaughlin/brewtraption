@@ -17,8 +17,12 @@ public class HeaterController {
   }
 
   private static void setOverride(final OverrideState override) {
+    Boolean heating = BrewProps.lookupBoolean(Constants.HLT_HEATING);
     CommandFactory.command().setHeaterState(override.heaterState());
-    BrewProps.writeValue(Constants.HLT_HEATING, override.heaterState().toString());
     BrewProps.writeValue(Constants.HLT_HEATER_OVERRIDE, override.toString());
+
+    if (heating != override.heaterState()) {
+      BrewProps.writeValue(Constants.HLT_HEATING, override.heaterState().toString());
+    }
   }
 }

@@ -40,6 +40,7 @@ public class HeaterControllerTest {
     Double current = 15.0;
     Double target = 10.0;
     expectNotToSetHeaterState();
+    BrewProps.writeValue(Constants.HLT_HEATING, "false");
     BrewProps.writeValue(Constants.HLT_HEATER_OVERRIDE, OverrideState.ON.toString());
     HeaterController.setHeaterState(current, target);
     assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(true));
@@ -50,6 +51,7 @@ public class HeaterControllerTest {
     Double current = 10.0;
     Double target = 15.0;
     expectNotToSetHeaterState();
+    BrewProps.writeValue(Constants.HLT_HEATING, "true");
     BrewProps.writeValue(Constants.HLT_HEATER_OVERRIDE, OverrideState.OFF.toString());
     HeaterController.setHeaterState(current, target);
     assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(false));
