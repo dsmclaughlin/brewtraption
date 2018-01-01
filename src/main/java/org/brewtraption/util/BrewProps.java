@@ -23,6 +23,8 @@ public class BrewProps {
     defaults.put(Constants.HOST, "localhost");
     defaults.put(Constants.PORT, 8080);
     defaults.put(Constants.HTL_OFF_DELTA, 1.0);
+    defaults.put(Constants.DEPLOYED, false);
+    defaults.put(Constants.HLT_HEATER_OVERRIDE, OverrideState.NONE.toString());
 
     DEFAULT_VALUES = Collections.unmodifiableMap(defaults);
   }

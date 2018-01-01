@@ -1,5 +1,6 @@
 package org.brewtraption.command;
 
+import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +24,7 @@ public class CommandFactory {
   //TODO - not very good, replace with var that is included in packaged at build time
   private static CommandUtil getProperUtil() {
     if (getHostName().contains("raspberry")) {
+      BrewProps.writeValue(Constants.DEPLOYED, "true");
       return new PiCommandUtil();
     } else {
       logWarning();

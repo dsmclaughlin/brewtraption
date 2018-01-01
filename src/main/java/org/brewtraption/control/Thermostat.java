@@ -1,7 +1,6 @@
 package org.brewtraption.control;
 
 import org.brewtraption.command.CommandFactory;
-import org.brewtraption.command.PiCommandUtil;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 
@@ -27,12 +26,16 @@ public class Thermostat {
   }
 
   private static void switchOff() {
-    CommandFactory.command().heaterOff();
-    BrewProps.writeValue(Constants.HLT_HEATING, "false");
+    if (BrewProps.lookupBoolean(Constants.HLT_HEATING)) {
+      CommandFactory.command().heaterOff();
+      BrewProps.writeValue(Constants.HLT_HEATING, "false");
+    }
   }
 
   private static void switchOn() {
-    CommandFactory.command().heaterOn();
-    BrewProps.writeValue(Constants.HLT_HEATING, "true");
+    if (!BrewProps.lookupBoolean(Constants.HLT_HEATING)) {
+      CommandFactory.command().heaterOn();
+      BrewProps.writeValue(Constants.HLT_HEATING, "true");
+    }
   }
 }

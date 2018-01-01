@@ -10,13 +10,11 @@ public class LocalCommandUtil implements CommandUtil {
 
   @Override
   public Result heaterOn() {
-    logger.info(LOG_MSG);
     return new Result(Result.Status.SUCCESS);
   }
 
   @Override
   public Result heaterOff() {
-    logger.info(LOG_MSG);
     return new Result(Result.Status.SUCCESS);
   }
 
@@ -27,7 +25,8 @@ public class LocalCommandUtil implements CommandUtil {
 
   @Override
   public Result readTemperature() {
-    logger.info(LOG_MSG);
-    return new Result(Result.Status.SUCCESS);
+    Result dummyResult = new Result(Result.Status.SUCCESS);
+    dummyResult.setStdOut("25.00");
+    return dummyResult;
   }
 }

@@ -3,11 +3,6 @@ package org.brewtraption.control;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
-import com.sun.tools.classfile.ConstantPool;
-import mockit.Capturing;
-import mockit.Mocked;
-import mockit.StrictExpectations;
-import mockit.Tested;
 import org.brewtraption.command.CommandFactory;
 import org.brewtraption.command.CommandUtil;
 import org.brewtraption.command.PiCommandUtil;
@@ -21,6 +16,8 @@ import org.junit.rules.TemporaryFolder;
 import java.io.File;
 import java.io.IOException;
 
+import mockit.StrictExpectations;
+
 public class ThermostatTest {
 
   @Rule
@@ -31,6 +28,7 @@ public class ThermostatTest {
     File propertyFile = temporaryFolder.newFile("brewtraption.properties");
     BrewProps.initialize(propertyFile.getAbsolutePath());
     BrewProps.writeValue(Constants.DEPLOYED, "true");
+    BrewProps.writeValue(Constants.HLT_HEATING, "false");
   }
 
   @Test
@@ -43,6 +41,7 @@ public class ThermostatTest {
   @Test
   public void testTurnHeaterOff() {
     expectHeaterToSwitchOff();
+    BrewProps.writeValue(Constants.HLT_HEATING, "true");
     Thermostat.setHeaterState(10.0, 8.0);
     assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(false));
   }
@@ -50,6 +49,7 @@ public class ThermostatTest {
   @Test
   public void testTurnHeaterOffWhenCloseEnough() {
     expectHeaterToSwitchOff();
+    BrewProps.writeValue(Constants.HLT_HEATING, "true");
     double current = 10.0;
     double target = current + BrewProps.lookupDouble(Constants.HTL_OFF_DELTA);
     Thermostat.setHeaterState(current, target);
