@@ -1,9 +1,25 @@
 header {
   background-color: #3f51b5;
-  padding: 3em;
 }
 
 header h1 {
   color: rgba(255, 255, 255, 0.92);
-  font-size: 4em;
+}
+
+@media (max-width: 600px) {
+  header {
+    padding: 2em;
+  }
+  header h1 {
+    font-size: 3em;
+  }
+}
+
+@media (min-width: 601px) {
+  header {
+    padding: 3em;
+  }
+  header h1 {
+    font-size: 4em;
+  }
 }

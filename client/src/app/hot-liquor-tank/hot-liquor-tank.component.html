@@ -1,5 +1,5 @@
 <div class="get-status">
-  <button (click)="getStatus()" mat-button>Get Status</button>
+  <button (click)="getStatus()" mat-raised-button color="primary">Get Status</button>
 </div>
 <div class="wrapper">
   <div class="column">
@@ -16,39 +16,41 @@
   </div>
   <div>
     <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <h2 class="mat-h2">Temperature Target</h2>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          {{lastTargetTemperature}}
+      <mat-card-header>
+        <mat-card-title>
+          <h2 class="mat-h2">Temperature Target</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{lastTargetTemperature}}
+        <p>
           {{targetTemperatureError}}
-        </mat-card-content>
-        <mat-card-actions>
-          <div>
-            <mat-form-field>
-                <input matInput type="number" name="temperature-target" [(ngModel)]="targetTemperature">
-            </mat-form-field>
-            <button (click)="setTargetTemperature(targetTemperature)"
-                    mat-raised-button color="accent">
-              Set Target
-            </button>
-          </div>
-        </mat-card-actions>
-      </mat-card>
+        </p>
+      </mat-card-content>
+      <mat-card-actions>
+        <div>
+          <mat-form-field>
+            <input matInput type="number" name="temperature-target" min="0" max="105" maxlength="4" [(ngModel)]="targetTemperature">
+          </mat-form-field>
+          <button (click)="setTargetTemperature(targetTemperature)"
+                  mat-raised-button color="accent">
+            Set Target
+          </button>
+        </div>
+      </mat-card-actions>
+    </mat-card>
   </div>
   <div>
     <mat-card>
-        <mat-card-header>
-          <mat-card-title>
-            <h2 class="mat-h2">Heater</h2>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content>
-          {{heaterOn ? 'On' : 'Off'}}
-        </mat-card-content>
-      </mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2 class="mat-h2">Heater</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{heaterOn ? 'On' : 'Off'}}
+      </mat-card-content>
+    </mat-card>
   </div>
   <div>
     <mat-card>
@@ -59,15 +61,16 @@
       </mat-card-header>
       <mat-card-content>
         {{overrideState}}
-        {{overrideStateError}}
+        <p>
+          {{overrideStateError}}
+        </p>
       </mat-card-content>
       <mat-card-actions>
         <div>
           <mat-radio-group
             [(ngModel)]="overrideState"
-            (change)="overrideChanged($event)"
-            style="display: block; margin: 20px;">
-            <mat-radio-button style="margin-right: 20px;"
+            (change)="overrideChanged($event)">
+            <mat-radio-button
               *ngFor="let state of overrideStates" [value]="state">
               {{state}}
             </mat-radio-button>
