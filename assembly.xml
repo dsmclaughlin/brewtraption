@@ -26,6 +26,10 @@
       </includes>
     </fileSet>
     <fileSet>
+      <directory>${project.basedir}/client/dist</directory>
+      <outputDirectory>/client/</outputDirectory>
+    </fileSet>
+    <fileSet>
       <directory>${assembly.lib.directory}</directory>
       <outputDirectory>lib</outputDirectory>
     </fileSet>
