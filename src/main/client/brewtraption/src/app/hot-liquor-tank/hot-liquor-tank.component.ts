@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { MatRadioChange } from '@angular/material/radio';
+import { HotLiquorTankService } from '../hot-liquor-tank.service';
 
 export const DrewsIP = '192.168.0.108';
 
-interface IHotLiquorTank {
+export interface IHotLiquorTank {
   currentTemperature: number;
   targetTemperature: number;
   heaterOn: boolean;
-  overrideState: "NONE" | "ON" | "OFF";
+  overrideState: OverrideState;
 }
+
+type OverrideState = "NONE" | "ON" | "OFF";
 
 @Component({
   selector: 'app-hot-liquor-tank',
@@ -17,33 +20,51 @@ interface IHotLiquorTank {
 })
 export class HotLiquorTankComponent implements OnInit {
 
-  currentStatus: IHotLiquorTank;
-  constructor(private http: HttpClient) {
+  lastOverrideState: OverrideState = 'NONE';
+  overrideState: OverrideState = 'NONE';
+  overrideStates: OverrideState[] = ["NONE", "ON", "OFF"];
+  overrideStateError: string = '';
 
+  lastTargetTemperature: number = 20;
+  targetTemperature: number = 20;
+  targetTemperatureError: string = '';
+
+  heaterOn: boolean = false;
+  currentTemperature: number = 20;
+
+  constructor(private service: HotLiquorTankService) {
+    this.getStatus();
   }
 
   ngOnInit() {
   }
 
   getStatus() {
-    this.http.get<IHotLiquorTank>(`http://${DrewsIP}:8083/api/hlt`).subscribe(data => {
-      this.currentStatus = data;
+    this.service.getStatus().then((data: IHotLiquorTank) => {
+      this.lastOverrideState = data.overrideState;
+      this.lastTargetTemperature = data.targetTemperature;
+      this.heaterOn = data.heaterOn;
+      this.currentTemperature = data.currentTemperature;
     });
   }
 
-  setOverride(type = 'ON') {
-    console.log(`PUT `, type);
-    this.http.put(`http://${DrewsIP}:8083/api/hlt/override`, `"${type}"`, {headers: {
-      'Content-Type': 'application/json'
-    }}).subscribe(data => {
-      console.log(data);
+  overrideChanged(event: MatRadioChange) {
+    this.service.setOverride(event.value).then(() => {
+      this.lastOverrideState == this.overrideState;
+      this.overrideStateError = '';
+    }).catch(error => {
+      this.overrideState = this.lastOverrideState;
+      this.overrideStateError = 'Something went wrong with setting the override';
     });
   }
 
-  setTarget(temp = 23.5) {
-    console.log('PUT ', temp);
-    this.http.put(`http://${DrewsIP}:8083/api/hlt/target`, temp).subscribe(data => {
-      console.log(data);
+  setTargetTemperature(temp) {
+    this.service.setTargetTemperature(temp).then(() => {
+      this.lastTargetTemperature = this.targetTemperature;
+      this.targetTemperatureError = '';
+    }).catch(error => {
+      this.targetTemperature = this.lastTargetTemperature;
+      this.targetTemperatureError = 'Something went wrong with setting the temperature';
     });
   }
 }

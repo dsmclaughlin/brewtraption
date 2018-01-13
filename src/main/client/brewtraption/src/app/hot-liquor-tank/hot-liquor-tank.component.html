@@ -1,4 +1,30 @@
-<p>{{currentStatus | json}}</p>
-<button (click)="getStatus()">Get Status</button>
-<button (click)="setOverride()">Set Override</button>
-<button (click)="setTarget()">Set Target</button>
+
+<div>
+  <h3 class="mat-h3">Current temperature {{currentTemperature}}</h3>
+  <h3 class="mat-h3">Heater on {{heaterOn}}</h3>
+</div>
+
+<button (click)="getStatus()" mat-button>Get Status</button>
+
+<h2 class="mat-h2">
+  Set Override Status
+</h2>
+<mat-radio-group
+  [(ngModel)]="overrideState"
+  (change)="overrideChanged($event)"
+  style="display: block; margin: 20px;">
+  <mat-radio-button style="margin-right: 20px;"
+    *ngFor="let state of overrideStates" [value]="state">
+    {{state}}
+  </mat-radio-button>
+</mat-radio-group>
+{{overrideStateError}}
+
+
+<h2 class="mat-h2">Set Target Temperature</h2>
+<mat-form-field>
+  <input matInput type="number" name="temperature-target" [(ngModel)]="targetTemperature">
+</mat-form-field>
+<button (click)="setTargetTemperature(targetTemperature)"
+        mat-raised-button color="accent">Set Target</button>
+{{targetTemperatureError}}
