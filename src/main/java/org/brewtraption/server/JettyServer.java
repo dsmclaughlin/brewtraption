@@ -5,8 +5,10 @@ import org.brewtraption.threads.HeaterControllerThread;
 import org.brewtraption.threads.TemperatureBroadcastThread;
 import org.brewtraption.websocket.EventSocket;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
+import org.eclipse.jetty.servlets.CrossOriginFilter;
 import org.eclipse.jetty.websocket.jsr356.server.deploy.WebSocketServerContainerInitializer;
 import org.glassfish.jersey.jackson.JacksonFeature;
 import org.glassfish.jersey.server.ResourceConfig;
@@ -77,6 +79,11 @@ public class JettyServer {
     ServletContextHandler context = new ServletContextHandler(ServletContextHandler.SESSIONS);
     context.setContextPath("/");
     context.addServlet(servletHolder, API_PREFIX);
+
+    FilterHolder filterHolder = new FilterHolder(CrossOriginFilter.class);
+    filterHolder.setInitParameter("allowedOrigins", "*");
+    filterHolder.setInitParameter("allowedMethods", "GET, POST, PUT");
+    context.addFilter(filterHolder, "/*", null);
 
     server.setHandler(context);
     return context;

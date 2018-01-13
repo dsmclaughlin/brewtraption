@@ -41,6 +41,12 @@
 			<artifactId>jetty-webapp</artifactId>
 			<version>${jetty-version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.eclipse.jetty</groupId>
+			<artifactId>jetty-servlets</artifactId>
+			<version>${jetty-version}</version>
+		</dependency>
+
 
 		<!-- https://mvnrepository.com/artifact/org.glassfish.jersey.containers/jersey-container-servlet -->
 		<dependency>
