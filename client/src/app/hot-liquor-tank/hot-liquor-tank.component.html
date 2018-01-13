@@ -1,30 +1,80 @@
-
-<div>
-  <h3 class="mat-h3">Current temperature {{currentTemperature}}</h3>
-  <h3 class="mat-h3">Heater on {{heaterOn}}</h3>
+<div class="get-status">
+  <button (click)="getStatus()" mat-button>Get Status</button>
+</div>
+<div class="wrapper">
+  <div class="column">
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2 class="mat-h2">Temperature Now</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{currentTemperature}}
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div>
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2 class="mat-h2">Temperature Target</h2>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{lastTargetTemperature}}
+          {{targetTemperatureError}}
+        </mat-card-content>
+        <mat-card-actions>
+          <div>
+            <mat-form-field>
+                <input matInput type="number" name="temperature-target" [(ngModel)]="targetTemperature">
+            </mat-form-field>
+            <button (click)="setTargetTemperature(targetTemperature)"
+                    mat-raised-button color="accent">
+              Set Target
+            </button>
+          </div>
+        </mat-card-actions>
+      </mat-card>
+  </div>
+  <div>
+    <mat-card>
+        <mat-card-header>
+          <mat-card-title>
+            <h2 class="mat-h2">Heater</h2>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          {{heaterOn ? 'On' : 'Off'}}
+        </mat-card-content>
+      </mat-card>
+  </div>
+  <div>
+    <mat-card>
+      <mat-card-header>
+        <mat-card-title>
+          <h2 class="mat-h2">Override</h2>
+        </mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        {{overrideState}}
+        {{overrideStateError}}
+      </mat-card-content>
+      <mat-card-actions>
+        <div>
+          <mat-radio-group
+            [(ngModel)]="overrideState"
+            (change)="overrideChanged($event)"
+            style="display: block; margin: 20px;">
+            <mat-radio-button style="margin-right: 20px;"
+              *ngFor="let state of overrideStates" [value]="state">
+              {{state}}
+            </mat-radio-button>
+          </mat-radio-group>
+        </div>
+      </mat-card-actions>
+    </mat-card>
+  </div>
 </div>
 
-<button (click)="getStatus()" mat-button>Get Status</button>
-
-<h2 class="mat-h2">
-  Set Override Status
-</h2>
-<mat-radio-group
-  [(ngModel)]="overrideState"
-  (change)="overrideChanged($event)"
-  style="display: block; margin: 20px;">
-  <mat-radio-button style="margin-right: 20px;"
-    *ngFor="let state of overrideStates" [value]="state">
-    {{state}}
-  </mat-radio-button>
-</mat-radio-group>
-{{overrideStateError}}
-
-
-<h2 class="mat-h2">Set Target Temperature</h2>
-<mat-form-field>
-  <input matInput type="number" name="temperature-target" [(ngModel)]="targetTemperature">
-</mat-form-field>
-<button (click)="setTargetTemperature(targetTemperature)"
-        mat-raised-button color="accent">Set Target</button>
-{{targetTemperatureError}}

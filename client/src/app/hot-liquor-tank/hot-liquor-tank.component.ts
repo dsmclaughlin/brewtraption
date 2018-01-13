@@ -34,6 +34,14 @@ export class HotLiquorTankComponent implements OnInit {
 
   constructor(private service: HotLiquorTankService) {
     this.getStatus();
+
+    const ws = new WebSocket(`ws://${DrewsIP}:8083/ws/`);
+
+    ws.onmessage = (message) => {
+      this.currentTemperature = message.data;
+      // const {timeStamp, data} = message;
+      // this.msg.push({data, timeStamp});
+    }
   }
 
   ngOnInit() {

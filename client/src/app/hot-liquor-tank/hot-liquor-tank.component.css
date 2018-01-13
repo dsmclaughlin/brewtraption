@@ -1,0 +1,59 @@
+mat-card {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+mat-card-content {
+    padding: 2em;
+}
+
+mat-card-actions {
+    padding: 2em;
+}
+
+mat-card-header {
+    background-color: rgb(214, 214, 214);
+}
+
+mat-card-title {
+    margin: 10px;
+}
+
+mat-card-header h2 {
+    margin-bottom: 0;
+}
+
+mat-card-actions {
+    padding: 1em;
+}
+
+mat-card-actions * {
+    box-sizing: border-box;
+}
+
+mat-card-actions div {
+    padding: 0.5em;
+}
+.wrapper {
+    display: grid;
+    grid-gap: 20px;
+    grid-auto-rows: minmax(100px, auto);
+}
+
+@media (max-width: 600px) {
+    .wrapper {
+        grid-template-columns: repeat(1, 1fr);
+    }
+}
+
+@media (min-width: 601px) {
+    .wrapper {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+.get-status {
+    margin: 20px;
+}

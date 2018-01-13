@@ -7,6 +7,7 @@ import { FormsModule }   from '@angular/forms';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 import { AppComponent } from './app.component';
 import { HotLiquorTankComponent } from './hot-liquor-tank/hot-liquor-tank.component';
@@ -25,7 +26,8 @@ import { HotLiquorTankService } from './hot-liquor-tank.service';
     BrowserAnimationsModule,
     MatRadioModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
   ],
   providers: [HotLiquorTankService],
   bootstrap: [AppComponent]
