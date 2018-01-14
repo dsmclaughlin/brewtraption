@@ -22,7 +22,9 @@ public class Thermostat {
   }
 
   private static boolean closeEnough(Double current, Double target) {
-    return Math.abs(current-target) <= BrewProps.lookupDouble(Constants.HTL_OFF_DELTA);
+    final double abs = Math.abs(current - target);
+    final Double aDouble = BrewProps.lookupDouble(Constants.HTL_OFF_DELTA);
+    return abs <= aDouble;
   }
 
   private static void switchOff() {

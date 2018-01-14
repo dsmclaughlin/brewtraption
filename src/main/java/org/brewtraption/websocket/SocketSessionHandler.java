@@ -1,5 +1,9 @@
 package org.brewtraption.websocket;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.brewtraption.dto.HltDTO;
+
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Set;
@@ -7,6 +11,7 @@ import java.util.Set;
 import javax.websocket.Session;
 
 public class SocketSessionHandler {
+  ObjectMapper mapper = new ObjectMapper();
 
   private final Set<Session> sessions = new HashSet<>();
 
@@ -26,15 +31,15 @@ public class SocketSessionHandler {
     sessions.remove(session);
   }
 
-  public void sendToAllConnectedSessions(final String message) {
+  public void sendToAllConnectedSessions(final HltDTO hltDTO) {
     for (Session session : sessions) {
-      sendToSession(session, message);
+      sendToSession(session, hltDTO);
     }
   }
 
-  private void sendToSession(final Session session, final String message) {
+  private void sendToSession(final Session session, final HltDTO hltDTO) {
     try {
-      session.getBasicRemote().sendText(message);
+      session.getBasicRemote().sendText(mapper.writeValueAsString(hltDTO));
     } catch (IOException ex) {
       sessions.remove(session);
     }

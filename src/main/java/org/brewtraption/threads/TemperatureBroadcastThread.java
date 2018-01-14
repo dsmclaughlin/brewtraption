@@ -1,5 +1,7 @@
 package org.brewtraption.threads;
 
+import org.brewtraption.control.BreweryController;
+import org.brewtraption.dto.HltDTO;
 import org.brewtraption.util.BrewProps;
 import org.brewtraption.util.Constants;
 import org.brewtraption.websocket.SocketSessionHandler;
@@ -21,10 +23,12 @@ public class TemperatureBroadcastThread extends Thread {
       Double currentTemp = readFIle();
       BrewProps.writeValue(Constants.HLT_CURRENT_TEMP, currentTemp.toString());
 
+      HltDTO hltDTO = BreweryController.getHTLInfo();
+
       SocketSessionHandler handler = SocketSessionHandler.getInstance();
 
       if (handler.hasConnectedSessions()) {
-        handler.sendToAllConnectedSessions(currentTemp.toString());
+        handler.sendToAllConnectedSessions(hltDTO);
       } else {
         waitForSocket();
       }
