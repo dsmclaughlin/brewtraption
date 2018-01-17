@@ -5,6 +5,7 @@ import org.brewtraption.threads.HeaterControllerThread;
 import org.brewtraption.threads.TemperatureBroadcastThread;
 import org.brewtraption.websocket.EventSocket;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.FilterHolder;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
@@ -39,6 +40,7 @@ public class JettyServer {
     ServletHolder servletHolder = configureAPIResources();
     ServletContextHandler context = configureServletContextHandler(server, servletHolder);
     initaliseWebSocketContainer(context);
+    addUIResourcesToContext(context);
 
     TemperatureBroadcastThread numberThread =
       new TemperatureBroadcastThread(TemperatureBroadcastThread.class.getSimpleName());
@@ -53,6 +55,13 @@ public class JettyServer {
     updateThread.start();
 
     startBrewtraptionServer(server);
+  }
+
+  private void addUIResourcesToContext(ServletContextHandler context) {
+    context.setWelcomeFiles(new String[] { "index.html" });
+    ServletHolder holderPwd = new ServletHolder("default", DefaultServlet.class);
+    holderPwd.setInitParameter("resourceBase", "./client/dist/");
+    context.addServlet(holderPwd,"/");
   }
 
   private void startBrewtraptionServer(Server server) {
