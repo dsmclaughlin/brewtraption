@@ -8,13 +8,15 @@ import org.brewtraption.websocket.SocketSessionHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class TemperatureBroadcastThread extends Thread {
+public class WebSocketBroadcastThread extends Thread {
 
-  private static Logger logger = LoggerFactory.getLogger(TemperatureBroadcastThread.class);
+  private static Logger logger = LoggerFactory.getLogger(WebSocketBroadcastThread.class);
 
-  public TemperatureBroadcastThread(String str) {
+  public WebSocketBroadcastThread(String str) {
     super(str);
   }
+
+  private static HltDTO last = null;
 
   public void run() {
     waitForSocket();
@@ -26,9 +28,12 @@ public class TemperatureBroadcastThread extends Thread {
       HltDTO hltDTO = BreweryController.getHTLInfo();
 
       SocketSessionHandler handler = SocketSessionHandler.getInstance();
-
+      //TODO also send when new client connects
       if (handler.hasConnectedSessions()) {
-        handler.sendToAllConnectedSessions(hltDTO);
+        if (!hltDTO.equals(last)) {
+          handler.sendToAllConnectedSessions(hltDTO);
+          last = hltDTO;
+        }
       } else {
         waitForSocket();
       }

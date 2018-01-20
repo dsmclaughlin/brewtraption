@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { HotLiquorTankService } from '../hot-liquor-tank.service';
 
-export const DrewsIP = '192.168.0.108';
+export const DrewsIP = '0.0.0.0';
 
 export interface IHotLiquorTank {
   currentTemperature: number;
@@ -33,27 +33,20 @@ export class HotLiquorTankComponent implements OnInit {
   currentTemperature: number = 20;
 
   constructor(private service: HotLiquorTankService) {
-    this.getStatus();
-
     const ws = new WebSocket(`ws://${DrewsIP}:8083/ws/`);
 
     ws.onmessage = (message) => {
-      this.currentTemperature = message.data;
+      const data = JSON.parse(message.data);
+      this.currentTemperature = data.currentTemperature;
+      this.heaterOn = data.heaterOn;
+      this.targetTemperature = data.targetTemperature;
+      this.overrideState = data.overrideState;
       // const {timeStamp, data} = message;
       // this.msg.push({data, timeStamp});
     }
   }
 
   ngOnInit() {
-  }
-
-  getStatus() {
-    this.service.getStatus().then((data: IHotLiquorTank) => {
-      this.lastOverrideState = data.overrideState;
-      this.lastTargetTemperature = data.targetTemperature;
-      this.heaterOn = data.heaterOn;
-      this.currentTemperature = data.currentTemperature;
-    });
   }
 
   overrideChanged(event: MatRadioChange) {

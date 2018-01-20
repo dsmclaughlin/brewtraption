@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { IHotLiquorTank } from './hot-liquor-tank/hot-liquor-tank.component';
 
-export const DrewsIP = '192.168.0.108';
+export const DrewsIP = '0.0.0.0';
 
 const ContentTypeJsonHeaders = {
   headers: {

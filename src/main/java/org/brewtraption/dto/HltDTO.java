@@ -1,5 +1,7 @@
 package org.brewtraption.dto;
 
+import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 import org.brewtraption.control.OverrideState;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -57,5 +59,31 @@ public class HltDTO {
 
   public void setOverrideState(final OverrideState overrideState) {
     this.overrideState = overrideState;
+  }
+
+  @Override
+  public boolean equals(Object o) {
+    if (this == o) return true;
+
+    if (o == null || getClass() != o.getClass()) return false;
+
+    HltDTO hltDTO = (HltDTO) o;
+
+    return new EqualsBuilder()
+      .append(heaterOn, hltDTO.heaterOn)
+      .append(currentTemperature, hltDTO.currentTemperature)
+      .append(targetTemperature, hltDTO.targetTemperature)
+      .append(overrideState, hltDTO.overrideState)
+      .isEquals();
+  }
+
+  @Override
+  public int hashCode() {
+    return new HashCodeBuilder(17, 37)
+      .append(currentTemperature)
+      .append(targetTemperature)
+      .append(heaterOn)
+      .append(overrideState)
+      .toHashCode();
   }
 }
