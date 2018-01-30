@@ -191,7 +191,7 @@ class MAX31865(object):
         else:
             t = -247.29 + 2.3992 * R0 + 0.00063962 * R0 * R0 + 1.0241E-6 * R0 * R0 * R0
         #    temperature_data = ['{:.0f}'.format(raw), '{:.4f}'.format(R0), '{:.4f}'.format(t)]
-            temperature_data = ['{:.4f}'.format(t)]
+            temperature_data = ['{:.1f}'.format(t)]
 
         # if R0==0:
         #    return -1,0
