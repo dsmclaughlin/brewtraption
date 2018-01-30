@@ -5,4 +5,6 @@
 mkdir -p server-dist
 cp target/brewtraption-dist.tar.gz server-dist
 tar -zxf server-dist/brewtraption-dist.tar.gz -C server-dist/
-java -jar server-dist/brewtraption/brewtraption.jar
+cd server-dist/brewtraption/
+pwd
+java -jar brewtraption.jar

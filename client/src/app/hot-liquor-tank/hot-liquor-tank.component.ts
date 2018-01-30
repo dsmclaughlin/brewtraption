@@ -2,8 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatRadioChange } from '@angular/material/radio';
 import { HotLiquorTankService } from '../hot-liquor-tank.service';
 
-export const DrewsIP = '0.0.0.0';
-
 export interface IHotLiquorTank {
   currentTemperature: number;
   targetTemperature: number;
@@ -33,7 +31,9 @@ export class HotLiquorTankComponent implements OnInit {
   currentTemperature: number = 20;
 
   constructor(private service: HotLiquorTankService) {
-    const ws = new WebSocket(`ws://${DrewsIP}:8083/ws/`);
+    const host = window.location.hostname;
+    const port = window.location.port;
+    const ws = new WebSocket('ws://' + host + ':' + port + '/ws/');
 
     ws.onmessage = (message) => {
       const data = JSON.parse(message.data);

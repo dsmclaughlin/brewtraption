@@ -24,7 +24,7 @@ public class EventSocket {
     if (message.equals("Hello")) {
       System.out.println("Received TEXT message: " + message);
     } else {
-      System.out.println("Received TEXT message: " + message + " oC");
+      System.out.println("Received TEXT message: " + message);
     }
   }
 

@@ -28,7 +28,7 @@ public class WebSocketBroadcastThread extends Thread {
       HltDTO hltDTO = BreweryController.getHTLInfo();
 
       SocketSessionHandler handler = SocketSessionHandler.getInstance();
-      //TODO also send when new client connects
+      //TODO also send when new client connect
       if (handler.hasConnectedSessions()) {
         if (!hltDTO.equals(last)) {
           handler.sendToAllConnectedSessions(hltDTO);

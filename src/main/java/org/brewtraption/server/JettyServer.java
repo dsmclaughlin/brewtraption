@@ -60,7 +60,7 @@ public class JettyServer {
   private void addUIResourcesToContext(ServletContextHandler context) {
     context.setWelcomeFiles(new String[] { "index.html" });
     ServletHolder holderPwd = new ServletHolder("default", DefaultServlet.class);
-    holderPwd.setInitParameter("resourceBase", "./client/dist/");
+    holderPwd.setInitParameter("resourceBase", "client/");
     context.addServlet(holderPwd,"/");
   }
 
