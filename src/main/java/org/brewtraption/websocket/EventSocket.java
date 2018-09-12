@@ -1,5 +1,8 @@
 package org.brewtraption.websocket;
 
+import org.brewtraption.threads.CurrentTempUpdateThread;
+import org.slf4j.LoggerFactory;
+
 import javax.websocket.ClientEndpoint;
 import javax.websocket.CloseReason;
 import javax.websocket.OnClose;
@@ -9,13 +12,17 @@ import javax.websocket.OnOpen;
 import javax.websocket.Session;
 import javax.websocket.server.ServerEndpoint;
 
+import com.sun.media.jfxmedia.logging.Logger;
+
 @ClientEndpoint
 @ServerEndpoint(value = "/ws/")
 public class EventSocket {
 
+  private static org.slf4j.Logger logger = LoggerFactory.getLogger(EventSocket.class);
+
   @OnOpen
   public void onWebSocketConnect(final Session sess) {
-    System.out.println("Socket Connected: " + sess);
+    logger.info("A wild WebSocket Client Appears: " + sess.getId());
     SocketSessionHandler.getInstance().addSession(sess);
   }
 
@@ -29,8 +36,9 @@ public class EventSocket {
   }
 
   @OnClose
-  public void onWebSocketClose(final CloseReason reason) {
-    System.out.println("Socket Closed: " + reason);
+  public void onWebSocketClose(final Session sess, CloseReason reason) {
+    logger.info("WebSocket Client Disconnected: " + sess.getId() + " " + reason);
+    SocketSessionHandler.getInstance().removeSession(sess);
   }
 
   @OnError

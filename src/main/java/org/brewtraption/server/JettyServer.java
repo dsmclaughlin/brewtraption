@@ -3,6 +3,8 @@ package org.brewtraption.server;
 import org.brewtraption.threads.CurrentTempUpdateThread;
 import org.brewtraption.threads.HeaterControllerThread;
 import org.brewtraption.threads.WebSocketBroadcastThread;
+import org.brewtraption.util.BrewProps;
+import org.brewtraption.util.Constants;
 import org.brewtraption.websocket.EventSocket;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.DefaultServlet;
@@ -24,11 +26,11 @@ import javax.websocket.DeploymentException;
 import javax.websocket.server.ServerContainer;
 
 public class JettyServer {
+  Logger logger = LoggerFactory.getLogger(JettyServer.class);
 
   private static final String API_PREFIX = "/api/*";
   private static final String RESOURCE_PACKAGES_TO_SCAN = "org.brewtraption.rest";
-  Logger logger = LoggerFactory.getLogger(JettyServer.class);
-  private JettyServerConfig config = null;
+  private JettyServerConfig config;
 
   public JettyServer(final JettyServerConfig config) {
     this.config = config;
@@ -39,7 +41,7 @@ public class JettyServer {
     Server server = new Server(socket);
     ServletHolder servletHolder = configureAPIResources();
     ServletContextHandler context = configureServletContextHandler(server, servletHolder);
-    initaliseWebSocketContainer(context);
+    initialiseWebSocketContainer(context);
     addUIResourcesToContext(context);
 
     WebSocketBroadcastThread numberThread =
@@ -65,6 +67,7 @@ public class JettyServer {
   }
 
   private void startBrewtraptionServer(Server server) {
+    logUiHostAndPort();
     try {
       server.start();
       server.join();
@@ -74,7 +77,12 @@ public class JettyServer {
     }
   }
 
-  private void initaliseWebSocketContainer(ServletContextHandler context) {
+  private void logUiHostAndPort() {
+    String message = "-- Starting Brewtraption UI on http://%s:%s/ --";
+    logger.info(String.format(message, BrewProps.lookupString(Constants.HOST), BrewProps.lookupString(Constants.PORT)));
+  }
+
+  private void initialiseWebSocketContainer(ServletContextHandler context) {
     try {
       ServerContainer container = WebSocketServerContainerInitializer.configureContext(context);
       container.addEndpoint(EventSocket.class);

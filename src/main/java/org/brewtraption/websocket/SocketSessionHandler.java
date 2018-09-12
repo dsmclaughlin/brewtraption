@@ -15,16 +15,18 @@ public class SocketSessionHandler {
 
   private final Set<Session> sessions = new HashSet<>();
 
-  private static class SocketSessionHandlerholder {
+  private static class SocketSessionHandlerHolder {
     public static final SocketSessionHandler INSTANCE = new SocketSessionHandler();
   }
 
   public static SocketSessionHandler getInstance() {
-    return SocketSessionHandlerholder.INSTANCE;
+    return SocketSessionHandlerHolder.INSTANCE;
   }
 
   public void addSession(final Session session) {
-    sessions.add(session);
+    if (!sessions.contains(session)) {
+      sessions.add(session);
+    }
   }
 
   public void removeSession(final Session session) {

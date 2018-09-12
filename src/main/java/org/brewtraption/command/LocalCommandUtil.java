@@ -3,6 +3,8 @@ package org.brewtraption.command;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Random;
+
 public class LocalCommandUtil implements CommandUtil {
 
   private static Logger logger = LoggerFactory.getLogger(CommandUtil.class);
@@ -26,7 +28,13 @@ public class LocalCommandUtil implements CommandUtil {
   @Override
   public Result readTemperature() {
     Result dummyResult = new Result(Result.Status.SUCCESS);
-    dummyResult.setStdOut("25.00");
+
+    Random r = new Random();
+    int Low = 10;
+    int High = 100;
+    int randomNum = r.nextInt(High-Low) + Low;
+
+    dummyResult.setStdOut(""+randomNum);
     return dummyResult;
   }
 }

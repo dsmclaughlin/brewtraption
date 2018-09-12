@@ -49,14 +49,11 @@ public class WebSocketBroadcastThread extends Thread {
   private void waitForSocket() {
     boolean waitLonger = true;
 
-    logger.info("Waiting for socket connection");
-
     while(waitLonger) {
       SocketSessionHandler handler = SocketSessionHandler.getInstance();
       waitLonger = !handler.hasConnectedSessions();
 
       if(!waitLonger) {
-        logger.info("A wild web socket client appears!");
         waitLonger = false;
       }
 
