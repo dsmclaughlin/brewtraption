@@ -1,5 +1,13 @@
 header {
+  margin-bottom: 1em;
   background-color: #3f51b5;
+  text-align: center;
+}
+
+header img {
+  width: 70px;
+  margin: 0 10px;
+  vertical-align: middle;
 }
 
 header h1 {
