@@ -21,14 +21,14 @@ export class HotLiquorTankComponent implements OnInit {
   lastOverrideState: OverrideState = 'NONE';
   overrideState: OverrideState = 'NONE';
   overrideStates: OverrideState[] = ["NONE", "ON", "OFF"];
-  overrideStateError: string = '';
+  overrideStateError: string;
 
-  lastTargetTemperature: number = 20;
-  targetTemperature: number = 20;
-  targetTemperatureError: string = '';
+  lastTargetTemperature: number;
+  targetTemperature: number;
+  targetTemperatureError: string;
 
   heaterOn: boolean = false;
-  currentTemperature: number = 20;
+  currentTemperature: number;
 
   constructor(private service: HotLiquorTankService) {
     const host = window.location.hostname;
@@ -39,7 +39,9 @@ export class HotLiquorTankComponent implements OnInit {
       const data = JSON.parse(message.data);
       this.currentTemperature = data.currentTemperature;
       this.heaterOn = data.heaterOn;
-      this.targetTemperature = data.targetTemperature;
+      if (!this.targetTemperature) {
+        this.targetTemperature = data.targetTemperature;
+      }
       this.overrideState = data.overrideState;
       // const {timeStamp, data} = message;
       // this.msg.push({data, timeStamp});
