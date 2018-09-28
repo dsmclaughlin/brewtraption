@@ -9,7 +9,7 @@ export interface IHotLiquorTank {
   overrideState: OverrideState;
 }
 
-type OverrideState = "NONE" | "ON" | "OFF";
+type OverrideState = 'NONE' | 'ON' | 'OFF';
 
 @Component({
   selector: 'app-hot-liquor-tank',
@@ -18,16 +18,16 @@ type OverrideState = "NONE" | "ON" | "OFF";
 })
 export class HotLiquorTankComponent implements OnInit {
 
-  lastOverrideState: OverrideState = 'NONE';
-  overrideState: OverrideState = 'NONE';
-  overrideStates: OverrideState[] = ["NONE", "ON", "OFF"];
+  lastOverrideState: OverrideState;
+  overrideState: OverrideState;
+  overrideStates: OverrideState[] = ['NONE', 'ON', 'OFF'];
   overrideStateError: string;
 
   lastTargetTemperature: number;
   targetTemperature: number;
   targetTemperatureError: string;
 
-  heaterOn: boolean = false;
+  heaterOn: boolean;
   currentTemperature: number;
 
   constructor(private service: HotLiquorTankService) {
@@ -39,13 +39,13 @@ export class HotLiquorTankComponent implements OnInit {
       const data = JSON.parse(message.data);
       this.currentTemperature = data.currentTemperature;
       this.heaterOn = data.heaterOn;
-      if (!this.targetTemperature) {
+      if (!this.targetTemperature && this.targetTemperature !== null) {
         this.targetTemperature = data.targetTemperature;
       }
       this.overrideState = data.overrideState;
       // const {timeStamp, data} = message;
       // this.msg.push({data, timeStamp});
-    }
+    };
   }
 
   ngOnInit() {
@@ -53,7 +53,7 @@ export class HotLiquorTankComponent implements OnInit {
 
   overrideChanged(event: MatRadioChange) {
     this.service.setOverride(event.value).then(() => {
-      this.lastOverrideState == this.overrideState;
+      this.lastOverrideState = this.overrideState;
       this.overrideStateError = '';
     }).catch(error => {
       this.overrideState = this.lastOverrideState;
