@@ -28,6 +28,7 @@ export class HotLiquorTankComponent implements OnInit {
   targetTemperatureError: string;
 
   heaterOn: boolean;
+  targetFocusState = false;
   currentTemperature: number;
 
   constructor(private service: HotLiquorTankService) {
@@ -39,7 +40,7 @@ export class HotLiquorTankComponent implements OnInit {
       const data = JSON.parse(message.data);
       this.currentTemperature = data.currentTemperature;
       this.heaterOn = data.heaterOn;
-      if (!this.targetTemperature && this.targetTemperature !== null) {
+      if (this.targetFocusState === false) {
         this.targetTemperature = data.targetTemperature;
       }
       this.overrideState = data.overrideState;
@@ -69,5 +70,9 @@ export class HotLiquorTankComponent implements OnInit {
       this.targetTemperature = this.lastTargetTemperature;
       this.targetTemperatureError = 'Something went wrong with setting the temperature';
     });
+  }
+
+  targetFocus(state) {
+    this.targetFocusState = state;
   }
 }

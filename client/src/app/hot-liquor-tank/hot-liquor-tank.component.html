@@ -26,7 +26,7 @@
       <mat-card-actions>
         <div>
           <mat-form-field>
-            <input matInput type="number" name="temperature-target" min="0" max="105" maxlength="4" [(ngModel)]="targetTemperature">
+            <input matInput type="number" name="temperature-target" min="0" max="105" maxlength="4" [(ngModel)]="targetTemperature" (focus)="targetFocus(true)" (blur)="targetFocus(false)">
           </mat-form-field>
           <button (click)="setTargetTemperature(targetTemperature)"
                   mat-raised-button color="accent">
