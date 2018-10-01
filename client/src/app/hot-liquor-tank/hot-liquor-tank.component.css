@@ -50,6 +50,7 @@ mat-radio-button {
 .wrapper {
     display: grid;
     grid-gap: 20px;
+    /* autoprefixer: off */
     grid-auto-rows: minmax(100px, auto);
 }
 
