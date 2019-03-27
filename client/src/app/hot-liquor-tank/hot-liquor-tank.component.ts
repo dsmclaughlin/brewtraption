@@ -58,7 +58,7 @@ export class HotLiquorTankComponent implements OnInit {
       this.overrideStateError = '';
     }).catch(error => {
       this.overrideState = this.lastOverrideState;
-      this.overrideStateError = 'Something went wrong with setting the override';
+      this.overrideStateError = 'Something went wrong setting the override';
     });
   }
 
@@ -68,7 +68,7 @@ export class HotLiquorTankComponent implements OnInit {
       this.targetTemperatureError = '';
     }).catch(error => {
       this.targetTemperature = this.lastTargetTemperature;
-      this.targetTemperatureError = 'Something went wrong with setting the temperature';
+      this.targetTemperatureError = 'Something went wrong setting the temperature';
     });
   }
 
