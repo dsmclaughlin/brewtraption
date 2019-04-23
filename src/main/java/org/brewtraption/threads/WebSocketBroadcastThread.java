@@ -63,7 +63,7 @@ public class WebSocketBroadcastThread extends Thread {
 
   private void sleep() {
     try {
-      Thread.sleep(1000);
+      Thread.sleep(100);
     } catch (Exception e) {
       logger.warn(e.getMessage());
     }
