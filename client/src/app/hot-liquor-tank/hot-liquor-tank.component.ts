@@ -44,8 +44,7 @@ export class HotLiquorTankComponent implements OnInit {
         this.targetTemperature = data.targetTemperature;
       }
       this.overrideState = data.overrideState;
-      // const {timeStamp, data} = message;
-      // this.msg.push({data, timeStamp});
+
     };
   }
 
