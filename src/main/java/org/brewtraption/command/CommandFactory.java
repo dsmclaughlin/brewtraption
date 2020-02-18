@@ -23,13 +23,21 @@ public class CommandFactory {
 
   //TODO - not very good, replace with var that is included in packaged at build time
   private static CommandUtil getProperUtil() {
-    if (getHostName().contains("raspberry")) {
+    if (isDeployed()) {
       BrewProps.writeValue(Constants.DEPLOYED, "true");
       return new PiCommandUtil();
     } else {
       logWarning();
       return new LocalCommandUtil();
     }
+  }
+
+  private static boolean isDeployed() {
+    String hostName = getHostName();
+
+    return hostName.contains("raspberry") ||
+           hostName.contains("brewtraption") ||
+           BrewProps.lookupBoolean(Constants.DEPLOYED);
   }
 
   private static void logWarning() {

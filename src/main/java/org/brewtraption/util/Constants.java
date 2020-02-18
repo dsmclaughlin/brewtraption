@@ -19,7 +19,6 @@ public class Constants {
   public static final String HLT_OFF_SCRIPT = "./resources/heater_off.py";
   public static final String HLT_SENSOR_SCRIPT = "./resources/sensor.py";
 
-
   public static final String PROPS_FILE = "./resources/brewtraption.properties";
   public static final String SENSOR_OUTPUT = "./resources/sensor.out";
 }

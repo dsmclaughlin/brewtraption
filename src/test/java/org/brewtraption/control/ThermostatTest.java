@@ -39,6 +39,30 @@ public class ThermostatTest {
   }
 
   @Test
+  public void testNullsDontBorkIt() {
+    expectHeaterToSwitchOff();
+    BrewProps.writeValue(Constants.HLT_HEATING, "true");
+    Thermostat.setHeaterState(null, null);
+    assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(false));
+  }
+
+  @Test
+  public void testNullCurrentDoesntBorkIt() {
+    expectHeaterToSwitchOff();
+    BrewProps.writeValue(Constants.HLT_HEATING, "true");
+    Thermostat.setHeaterState(null, 7.0);
+    assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(false));
+  }
+
+  @Test
+  public void testNullTargetDoesntBorkIt() {
+    expectHeaterToSwitchOff();
+    BrewProps.writeValue(Constants.HLT_HEATING, "true");
+    Thermostat.setHeaterState(23.0, null);
+    assertThat(BrewProps.lookupBoolean(Constants.HLT_HEATING), is(false));
+  }
+
+  @Test
   public void testTurnHeaterOff() {
     expectHeaterToSwitchOff();
     BrewProps.writeValue(Constants.HLT_HEATING, "true");
